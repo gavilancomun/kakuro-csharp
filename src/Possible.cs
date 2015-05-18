@@ -1,13 +1,13 @@
-package com.flowlikeariver.kakuro;
+namespace kakuro {
 
-import com.flowlikeariver.kakuro.cell.ValueCell;
-import java.util.Set;
-import java.util.TreeSet;
+  using System.Collections.Generic;
+
+  using kakuro.cell;
 
 public class Possible {
 
-private final ValueCell cell;
-private Set<Integer> values = new TreeSet<>();
+internal ValueCell cell;
+internal SortedSet<int> values = new SortedSet<int>();
 
 public Possible(ValueCell cell) {
   this.cell = cell;
@@ -16,14 +16,14 @@ public Possible(ValueCell cell) {
 /**
  * @return the values
  */
-public Set<Integer> getValues() {
+public SortedSet<int> getValues() {
   return values;
 }
 
 /**
  * @param values the values to set
  */
-public void setValues(Set<Integer> values) {
+public void setValues(SortedSet<int> values) {
   this.values = values;
 }
 
@@ -35,13 +35,15 @@ public ValueCell getCell() {
 }
 
 public void add(int n) {
-  values.add(n);
+  values.Add(n);
 }
 
 public int update() {
   int previousSize = cell.size();
   cell.setValues(values);
   return previousSize - cell.size();
+}
+
 }
 
 }
