@@ -34,7 +34,7 @@ public ValueCell getCell() {
   return cell;
 }
 
-public void add(int n) {
+public void Add(int n) {
   values.Add(n);
 }
 
