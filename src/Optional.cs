@@ -41,5 +41,9 @@ namespace kakuro {
     public T GetOr(T @default) {
       return this.hasValue ? this.value : @default;
     }
+
+    public T get() {
+      return value;
+    }
   }
 }

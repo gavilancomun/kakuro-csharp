@@ -1,6 +1,7 @@
 namespace kakuro {
 
   using System.Collections.Generic;
+  using System.Linq;
 
   using kakuro.cell;
 
@@ -53,6 +54,10 @@ public RowDef addDownAcross(int down, int across) {
 
 public Optional<Cell> get(int i) {
   return (i >= cells.Count) ? Optional<Cell>.empty() : Optional<Cell>.ofNullable(cells[i]);
+}
+
+public IEnumerable<Cell> Skip(int i) {
+  return cells.Skip(i);
 }
 }
 }
