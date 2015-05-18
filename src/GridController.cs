@@ -112,6 +112,17 @@ namespace kakuro {
       }
     }
 
+    public static void Main() {
+      GridController grid = new GridController();
+      grid.createRow().addEmpty().addDown(4).addDown(22).addEmpty().addDown(16).addDown(3);
+      grid.createRow().addAcross(3).addValue(2).addDownAcross(16, 6).addValue(2);
+      grid.createRow().addAcross(18).addValue(5);
+      grid.createRow().addEmpty().addDownAcross(17, 23).addValue(3).addDown(14);
+      grid.createRow().addAcross(9).addValue(2).addAcross(6).addValue(2);
+      grid.createRow().addAcross(15).addValue(2).addAcross(12).addValue(2);
+      grid.solve();
+    }
+
   }
 }
 
