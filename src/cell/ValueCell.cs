@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace kakuro.cell {
@@ -28,13 +29,18 @@ namespace kakuro.cell {
 	  return values.Contains(value);
 	}
 
-	public virtual string draw() {
-    String result = "";
-    for (int i = 1; i < 10; ++i) {
-      result += isPossible(i) ? i.ToString() : ".";
+  public virtual string draw() {
+    if (1 == values.Count) {
+      return values.Select(v => "     " + v + "    ").ToList()[0];
     }
-    return result;
-	}
+    else {
+      String result = " ";
+      for (int i = 1; i < 10; ++i) {
+        result += isPossible(i) ? i.ToString() : ".";
+      }
+      return result;
+    }
+  }
 
 	public virtual int size() {
 	  return values.Count;
