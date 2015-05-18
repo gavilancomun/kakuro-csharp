@@ -40,7 +40,7 @@ public void Add(int n) {
 
 public int update() {
   int previousSize = cell.size();
-  cell.setValues(values);
+  cell.values = values;
   return previousSize - cell.size();
 }
 

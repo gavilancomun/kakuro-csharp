@@ -33,7 +33,7 @@ private List<List<int>> permute(int pos, int target, List<int> soFar) {
     }
     else {
       List<List<int>> result = new List<List<int>>();
-      foreach (int v in cells[pos].getValues()) {
+      foreach (int v in cells[pos].values) {
         result.AddRange(permute(pos + 1, target - v, copyAdd(soFar, v)));
       }
       return result;
