@@ -47,9 +47,9 @@ namespace kakuro {
     public void createAcrossSums() {
       foreach (RowDef row in rows) {
         for (int c = 0; c < rows[0].size(); ++c) {
-          Optional<Cell> optCell = row.get(c);
+          var optCell = row.get(c);
           if (optCell.HasValue) {
-            Cell cell = optCell.get();
+            var cell = optCell.get();
             if (cell is Across) {
               sums.Add(new Sum(((Across)cell).getAcrossTotal(),
                 row.Skip(c + 1)
@@ -65,13 +65,13 @@ namespace kakuro {
     public void createDownSums() {
       for (int r = 0; r < rows.Count; ++r) {
         for (int c = 0; c < rows[0].size(); ++c) {
-          Optional<Cell> optCell = rows[r].get(c);
+          var optCell = rows[r].get(c);
           if (optCell.HasValue) {
-            Cell cell = optCell.get();
+            var cell = optCell.get();
             if (cell is Down) {
-              List<ValueCell> vs = new List<ValueCell>();
+              var vs = new List<ValueCell>();
               for (int pos = r + 1; pos < rows.Count; ++pos) {
-                Optional<Cell> optV = rows[pos].get(c);
+                var optV = rows[pos].get(c);
                 if (optV.HasValue) {
                   Cell v = optV.get();
                   if (v is ValueCell) {
@@ -107,7 +107,7 @@ namespace kakuro {
     }
 
     public static void Main() {
-      GridController grid = new GridController();
+      var grid = new GridController();
       grid.createRow().addEmpty().addDown(4).addDown(22).addEmpty().addDown(16).addDown(3);
       grid.createRow().addAcross(3).addValue(2).addDownAcross(16, 6).addValue(2);
       grid.createRow().addAcross(18).addValue(5);

@@ -56,11 +56,11 @@ public int solveStep() {
           .Where(p => cells[last].isPossible(p[last]))
           .Where(p => areAllDifferent(p));
   foreach (var p in filtered) {
-    for (int i = 0; i <= last; ++i) {
+    foreach (var i in Enumerable.Range(0, last + 1)) {
       possibles[i].Add(p[i]);
     }
   }
-  return possibles.Aggregate(0, (acc, v) => acc + v.update());
+  return possibles.Sum(v => v.update());
 }
 
 }

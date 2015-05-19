@@ -6,7 +6,7 @@ namespace kakuro {
 
 public class RowDef {
 
-List<Cell> cells = new List<Cell>();
+private List<Cell> cells = new List<Cell>();
 
 public RowDef() {
 }
