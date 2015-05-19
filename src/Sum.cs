@@ -18,35 +18,29 @@ private bool areAllDifferent(List<int> candidates) {
   return (new SortedSet<int>(candidates).Count == candidates.Count);
 }
 
-private List<int> copyAdd(List<int> vs, int v) {
+private List<int> copyAdd(IEnumerable<int> vs, int v) {
   var result = new List<int>(vs);
   result.Add(v);
   return result;
 }
 
-private List<List<int>> permute(int pos, int target, List<int> soFar) {
+private IEnumerable<List<int>> permute(int pos, int target, IEnumerable<int> soFar) {
   if (target >= 1) {
     if (pos == (cells.Count - 1)) {
-      var result = new List<List<int>>();
-      result.Add(copyAdd(soFar, target));
-      return result;
+      return Enumerable.Repeat(copyAdd(soFar, target), 1);
     }
     else {
-      var result = new List<List<int>>();
-      foreach (var v in cells[pos].values) {
-        result.AddRange(permute(pos + 1, target - v, copyAdd(soFar, v)));
-      }
-      return result;
+      return cells[pos].values.SelectMany(v => permute(pos + 1, target - v, copyAdd(soFar, v)));
     }
   }
   else {
-    return new List<List<int>>();
+    return Enumerable.Empty<List<int>>();
   }
 }
 
 // Exhaustive search for possible solutions
-private List<List<int>> permuteAll() {
-  return permute(0, total, new List<int>());
+private IEnumerable<List<int>> permuteAll() {
+  return permute(0, total, Enumerable.Empty<int>());
 }
 
 public int solveStep() {

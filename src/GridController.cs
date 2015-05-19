@@ -47,16 +47,12 @@ namespace kakuro {
     public void createAcrossSums() {
       foreach (RowDef row in rows) {
         foreach (var c in Enumerable.Range(0, rows[0].size())) {
-          var optCell = row[c];
-          if (optCell.HasValue) {
-            var cell = optCell.get();
-            if (cell is Across) {
-              sums.Add(new Sum(((Across)cell).getAcrossTotal(),
-                row.Skip(c + 1)
-                .TakeWhile(v => v is ValueCell)
-                .Cast<ValueCell>()
-                .ToList()));
-            }
+          foreach (var cell in row[c].Where(cell => cell is Across)) {
+            sums.Add(new Sum(((Across)cell).getAcrossTotal(),
+              row.Skip(c + 1)
+              .TakeWhile(v => v is ValueCell)
+              .Cast<ValueCell>()
+              .ToList()));
           }
         }
       }
@@ -65,25 +61,21 @@ namespace kakuro {
     public void createDownSums() {
       foreach (var r in Enumerable.Range(0, rows.Count)) {
         foreach (var c in Enumerable.Range(0, rows[0].size())) {
-          var optCell = rows[r][c];
-          if (optCell.HasValue) {
-            var cell = optCell.get();
-            if (cell is Down) {
-              var vs = new List<ValueCell>();
-              for (int pos = r + 1; pos < rows.Count; ++pos) {
-                var optV = rows[pos][c];
-                if (optV.HasValue) {
-                  Cell v = optV.get();
-                  if (v is ValueCell) {
-                    vs.Add((ValueCell)v);
-                  }
-                  else {
-                    break;
-                  }
+          foreach (var cell in rows[r][c].Where(cell => cell is Down)) { 
+            var vs = new List<ValueCell>();
+            for (int pos = r + 1; pos < rows.Count; ++pos) {
+              var optV = rows[pos][c];
+              if (optV.HasValue) {
+                Cell v = optV.get();
+                if (v is ValueCell) {
+                  vs.Add((ValueCell)v);
+                }
+                else {
+                  break;
                 }
               }
-              sums.Add(new Sum(((Down)cell).getDownTotal(), vs));
             }
+            sums.Add(new Sum(((Down)cell).getDownTotal(), vs));
           }
         }
       }
