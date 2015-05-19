@@ -1,12 +1,12 @@
 namespace kakuro {
+  using kakuro.cell;
   using System.Collections.Generic;
   using System.Linq;
-  using kakuro.cell;
 
 public class Sum {
 
-internal int total;
-internal List<ValueCell> cells = new List<ValueCell>();
+private int total;
+private List<ValueCell> cells = new List<ValueCell>();
 
 public Sum(int total, List<ValueCell> valueCells) {
   this.total = total;
@@ -19,7 +19,7 @@ private bool areAllDifferent(List<int> candidates) {
 }
 
 private List<int> copyAdd(List<int> vs, int v) {
-  List<int> result = new List<int>(vs);
+  var result = new List<int>(vs);
   result.Add(v);
   return result;
 }
@@ -27,13 +27,13 @@ private List<int> copyAdd(List<int> vs, int v) {
 private List<List<int>> permute(int pos, int target, List<int> soFar) {
   if (target >= 1) {
     if (pos == (cells.Count - 1)) {
-      List<List<int>> result = new List<List<int>>();
+      var result = new List<List<int>>();
       result.Add(copyAdd(soFar, target));
       return result;
     }
     else {
-      List<List<int>> result = new List<List<int>>();
-      foreach (int v in cells[pos].values) {
+      var result = new List<List<int>>();
+      foreach (var v in cells[pos].values) {
         result.AddRange(permute(pos + 1, target - v, copyAdd(soFar, v)));
       }
       return result;
@@ -50,25 +50,17 @@ private List<List<int>> permuteAll() {
 }
 
 public int solveStep() {
-  List<Possible> possibles = new List<Possible>();
-  foreach (ValueCell cell in cells) {
-    possibles.Add(new Possible(cell));
-  }
+  var possibles = cells.Select(c => new Possible(c)).ToList();
   int last = cells.Count - 1;
-  List<List<int>> filtered = permuteAll()
+  var filtered = permuteAll()
           .Where(p => cells[last].isPossible(p[last]))
-          .Where(p => areAllDifferent(p))
-          .ToList();
-  foreach (List<int> p in filtered) {
+          .Where(p => areAllDifferent(p));
+  foreach (var p in filtered) {
     for (int i = 0; i <= last; ++i) {
       possibles[i].Add(p[i]);
     }
   }
-  int sum = 0;
-  foreach (Possible p in possibles) {
-    sum += p.update();
-  }
-  return sum;
+  return possibles.Aggregate(0, (acc, v) => acc + v.update());
 }
 
 }

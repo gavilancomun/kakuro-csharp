@@ -1,9 +1,8 @@
 namespace kakuro {
 
+  using kakuro.cell;
   using System.Collections.Generic;
   using System.Linq;
-
-  using kakuro.cell;
 
 public class RowDef {
 
@@ -17,12 +16,7 @@ public int size() {
 }
 
 public string draw() {
-  string result = "";
-  foreach (Cell cell in cells) {
-    result += cell.draw();
-  }
-  result += "\n";
-  return result;
+  return cells.Aggregate("", (acc, v) => acc + v.draw()) + "\n";
 }
 
 public RowDef addEmpty() {
@@ -31,9 +25,7 @@ public RowDef addEmpty() {
 }
 
 public RowDef addValue(int n) {
-  for (int i = 1; i <= n; ++i) {
-    cells.Add(new ValueCell());
-  }
+  cells.AddRange(Enumerable.Range(1, n).Select(i => new ValueCell()).ToList());
   return this;
 }
 

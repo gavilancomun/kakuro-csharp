@@ -1,10 +1,9 @@
 namespace kakuro {
 
-  using System.Collections.Generic;
-  using System;
-  using System.Linq;
-
   using kakuro.cell;
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
 
   public class GridController {
 
@@ -22,12 +21,7 @@ namespace kakuro {
     }
 
     public string draw() {
-      List<string> results = rows.Select(r => r.draw()).ToList();
-      string result = "";
-      foreach (String s in results) {
-        result += s;
-      }
-      return result;
+      return rows.Select(r => r.draw()).Aggregate("", (acc, v) => acc + v);
     }
 
     public void addEmpty() {
