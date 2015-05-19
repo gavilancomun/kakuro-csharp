@@ -47,7 +47,7 @@ namespace kakuro {
     public void createAcrossSums() {
       foreach (RowDef row in rows) {
         foreach (var c in Enumerable.Range(0, rows[0].size())) {
-          var optCell = row.get(c);
+          var optCell = row[c];
           if (optCell.HasValue) {
             var cell = optCell.get();
             if (cell is Across) {
@@ -65,13 +65,13 @@ namespace kakuro {
     public void createDownSums() {
       foreach (var r in Enumerable.Range(0, rows.Count)) {
         foreach (var c in Enumerable.Range(0, rows[0].size())) {
-          var optCell = rows[r].get(c);
+          var optCell = rows[r][c];
           if (optCell.HasValue) {
             var cell = optCell.get();
             if (cell is Down) {
               var vs = new List<ValueCell>();
               for (int pos = r + 1; pos < rows.Count; ++pos) {
-                var optV = rows[pos].get(c);
+                var optV = rows[pos][c];
                 if (optV.HasValue) {
                   Cell v = optV.get();
                   if (v is ValueCell) {

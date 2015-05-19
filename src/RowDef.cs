@@ -44,8 +44,8 @@ public RowDef addDownAcross(int down, int across) {
   return this;
 }
 
-public Optional<Cell> get(int i) {
-  return (i >= cells.Count) ? Optional<Cell>.empty() : Optional<Cell>.ofNullable(cells[i]);
+public Optional<Cell> this[int i] {
+  get { return (i >= cells.Count) ? Optional<Cell>.empty() : Optional<Cell>.ofNullable(cells[i]); }
 }
 
 public IEnumerable<Cell> Skip(int i) {
