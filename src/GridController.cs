@@ -101,6 +101,7 @@ namespace kakuro {
     public static void Main() {
       new TestParse().testAPI();
       new TestParse().testParse();
+      new TestParse().testWikipediaExample();
     }
 
   }
