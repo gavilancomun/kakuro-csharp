@@ -90,18 +90,17 @@ namespace kakuro {
       return sums.Sum(s => s.solveStep());
     }
 
-    public void solve() {
+    public string solve() {
       createSums();
       Console.WriteLine(draw());
       while (scan() > 0) {
         Console.WriteLine(draw());
       }
+      return draw();
     }
 
     public static void Main() {
       new TestParse().testAPI();
-      new TestParse().testParse();
-      new TestParse().testWikipediaExample();
     }
 
   }
