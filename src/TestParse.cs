@@ -2,9 +2,11 @@ namespace kakuro {
 
   using System;
   using System.IO;
+  using NUnit.Framework;
 
   public class TestParse {
 
+    [Test]
     public void testAPI() {
       var grid = new GridController();
       grid.createRow().addEmpty().addDown(4).addDown(22).addEmpty().addDown(16).addDown(3);
@@ -16,6 +18,7 @@ namespace kakuro {
       grid.solve();
     }
 
+    [Test]
     public void testParse() {
       var k = "XXXXX  4\\-   22\\-  XXXXX  16\\-  3\\-\n" +
                  "-\\3   .      .      16\\6  .      .\n" +
@@ -27,6 +30,7 @@ namespace kakuro {
       gc.solve();
     }
 
+    [Test]
     public void testWikipediaExample() {
       var k = "XXXXXX 23\\- 30\\-  XXXXXX XXXXXX 27\\- 12\\- 16\\- \n" +
                  "-\\16  .     .      XXXXXX 17\\24 .     .     .     \n" +

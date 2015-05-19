@@ -13,6 +13,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Antlr4.Runtime" />
+    <Reference Include="NUnit.Framework" />
   </ItemGroup>
 
   <!--
