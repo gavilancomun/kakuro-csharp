@@ -4,12 +4,6 @@
 
 	string draw();
 
-	bool isAcross();
-
-	bool isDown();
-
-	bool isEmpty();
-
 	}
 
 }

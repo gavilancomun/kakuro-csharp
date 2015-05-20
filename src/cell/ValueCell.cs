@@ -12,18 +12,6 @@ namespace kakuro.cell {
 	  values = new SortedSet<int>{1, 2, 3, 4, 5, 6, 7, 8, 9};
 	}
 
-	public virtual bool isAcross() {
-		  return false;
-	}
-
-	public virtual bool isDown() {
-		  return false;
-	}
-
-	public virtual bool isEmpty() {
-		  return true;
-	}
-
 	public virtual bool isPossible(int value) {
 	  return values.Contains(value);
 	}
