@@ -1,11 +1,11 @@
 ﻿namespace kakuro.cell {
 
-	public class EmptyCell : Cell {
+  public struct EmptyCell : Cell {
 
-	public virtual string draw() {
-	  return "   -----  ";
-	}
+    public string draw() {
+      return "   -----  ";
+    }
 
-	}
+  }
 
 }

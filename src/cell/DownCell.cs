@@ -1,21 +1,21 @@
 ﻿namespace kakuro.cell {
 
-	public class DownCell : Cell, Down {
+  public struct DownCell : Cell, Down {
 
-  private int total;
+    private int total;
 
-	public DownCell(int total) {
-	  this.total = total;
-	}
+    public DownCell(int total) {
+      this.total = total;
+    }
 
-	public virtual string draw() {
-	  return string.Format("   {0,2:D}\\--  ", total);
-	}
+    public string draw() {
+      return string.Format("   {0,2:D}\\--  ", total);
+    }
 
-	public virtual int getDownTotal() {
-		  return total;
-	}
+    public int getDownTotal() {
+      return total;
+    }
 
-	}
+  }
 
 }

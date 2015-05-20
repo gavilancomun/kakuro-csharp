@@ -1,21 +1,21 @@
 ﻿namespace kakuro.cell {
 
-	public class AcrossCell : Cell, Across {
+  public struct AcrossCell : Cell, Across {
 
-  private int total;
+    private int total;
 
-	public AcrossCell(int total) {
-	  this.total = total;
-	}
+    public AcrossCell(int total) {
+      this.total = total;
+    }
 
-	public virtual string draw() {
-	  return string.Format("   --\\{0,-2:D}  ", total);
-	}
+    public string draw() {
+      return string.Format("   --\\{0,-2:D}  ", total);
+    }
 
-	public virtual int getAcrossTotal() {
-		  return total;
-	}
+    public int getAcrossTotal() {
+      return total;
+    }
 
-	}
+  }
 
 }
