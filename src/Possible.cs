@@ -12,13 +12,6 @@ public Possible(ValueCell cell) {
   this.cell = cell;
 }
 
-/**
- * @return the cell
- */
-public ValueCell getCell() {
-  return cell;
-}
-
 public void Add(int n) {
   values.Add(n);
 }
