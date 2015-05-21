@@ -61,7 +61,7 @@ namespace kakuro {
     public void createDownSums() {
       foreach (var r in Enumerable.Range(0, rows.Count)) {
         foreach (var c in Enumerable.Range(0, rows[0].size())) {
-          foreach (var cell in rows[r][c].Where(cell => cell is Down)) { 
+          foreach (var cell in rows[r][c].Where(cell => cell is Down)) {
             var vs = new List<ValueCell>();
             for (int pos = r + 1; pos < rows.Count; ++pos) {
               var optV = rows[pos][c];
