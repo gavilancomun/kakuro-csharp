@@ -59,7 +59,7 @@ namespace kakuro
         [Test]
         public void testProduct()
         {
-            List<HashSet<int>> data = asList(asSet(1, 2), asSet(10), asSet(100, 200, 300));
+            List<SortedSet<int>> data = asList(asSet(1, 2), asSet(10), asSet(100, 200, 300));
             List<List<int>> expected = asList(
               asList(1, 10, 100),
               asList(1, 10, 200),
@@ -68,6 +68,17 @@ namespace kakuro
               asList(2, 10, 200),
               asList(2, 10, 300));
             Assert.AreEqual(expected, product(data));
+        }
+
+        [Test]
+        public void testPermute()
+        {
+            List<ValueCell> vs = asList(v(), v(), v());
+            List<List<int>> results = permuteAll(vs, 6);
+            Assert.AreEqual(10, results.Count);
+            List<List<int>> diff = results.Where(k => allDifferent(k))
+              .ToList();
+            Assert.AreEqual(6, diff.Count);
         }
 
     }

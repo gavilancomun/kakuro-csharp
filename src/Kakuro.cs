@@ -75,9 +75,9 @@ namespace kakuro
         {
             return a.Concat(b).ToList();
         }
-        public static HashSet<T> asSet<T>(params T[] values)
+        public static SortedSet<T> asSet<T>(params T[] values)
         {
-            return new HashSet<T>(values);
+            return new SortedSet<T>(values);
         }
 
         public static List<T> asList<T>(params T[] values)
@@ -85,7 +85,7 @@ namespace kakuro
             return new List<T>(values);
         }
 
-        public static List<List<T>> product<T>(List<HashSet<T>> colls)
+        public static List<List<T>> product<T>(List<SortedSet<T>> colls)
         {
             switch (colls.Count)
             {
@@ -95,11 +95,17 @@ namespace kakuro
                     return colls[0].Select(a => asList(a)).ToList();
                 default:
                     ICollection<T> head = colls[0];
-                    List<HashSet<T>> tail = colls.Skip(1).ToList();
+                    List<SortedSet<T>> tail = colls.Skip(1).ToList();
                     List<List<T>> tailProd = product(tail);
                     return head.SelectMany(x => tailProd.Select(ys => concatLists(asList(x), ys)))
                             .ToList();
             }
+        }
+        public static List<List<int>> permuteAll(List<ValueCell> vs, int target)
+        {
+            List<SortedSet<int>> values = vs.Select(v => v.values).ToList();
+            return product(values).Where(x => target == x.Sum(n => n))
+                    .ToList();
         }
 
     }
