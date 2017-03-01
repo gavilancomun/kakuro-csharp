@@ -100,7 +100,7 @@ namespace kakuro {
     }
 
     public static void Main() {
-      new TestParse().testAPI();
+//      new TestParse().testAPI();
     }
 
   }

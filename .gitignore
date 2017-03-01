@@ -1,11 +1,15 @@
 *.swp
 *~
-Bin/
-obj/
-*.suo
+
 target/
 TestResult.xml
 
 # NuGet
 packages/
+
+# Visual Studio
+*.sln
+Bin/
+obj/
+*.suo
 

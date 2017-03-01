@@ -1,5 +1,7 @@
 # kakuro-csharp
-Kakuro puzzle solver in C# with Antlr.
+Kakuro puzzle solver in C#
+
+## Work in progress with Antlr.
 
 Antlr support can be integrated into Visual Studio
 

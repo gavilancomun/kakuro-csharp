@@ -18,14 +18,13 @@
     <Compile Include="src\cell\DownCell.cs" />
     <Compile Include="src\cell\EmptyCell.cs" />
     <Compile Include="src\cell\ValueCell.cs" />
-    <Compile Include="src\CreateModelListener.cs" />
+    <Compile Include="src\Kakuro.cs" />
     <Compile Include="src\GridController.cs" />
-    <Compile Include="src\Interpreter.cs" />
     <Compile Include="src\Optional.cs" />
     <Compile Include="src\Possible.cs" />
     <Compile Include="src\RowDef.cs" />
     <Compile Include="src\Sum.cs" />
-    <Compile Include="src\TestParse.cs" />
+    <Compile Include="src\TestKakuro2.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Antlr4.Runtime, Version=4.5.0.0, Culture=neutral, PublicKeyToken=09abb75b9ed49849, processorArchitecture=MSIL">
@@ -40,6 +39,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <!--
   <Target Name="Build" Inputs="@(Compile)" Outputs="$(OutputPath)$(AssemblyName).exe">

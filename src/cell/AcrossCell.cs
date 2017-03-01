@@ -9,7 +9,7 @@
     }
 
     public string draw() {
-      return string.Format("   --\\{0,-2:D}  ", total);
+      return string.Format("   --\\{0,2:D}  ", total);
     }
 
     public int getAcrossTotal() {

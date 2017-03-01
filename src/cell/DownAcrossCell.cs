@@ -11,7 +11,7 @@
     }
 
     public string draw() {
-      return string.Format("   {0,2:D}\\{1,-2:D}  ", down, across);
+      return string.Format("   {0,2:D}\\{1,2:D}  ", down, across);
     }
 
     public int getAcrossTotal() {
