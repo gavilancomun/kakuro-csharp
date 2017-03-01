@@ -108,5 +108,19 @@ namespace kakuro
                     .ToList();
         }
 
+        public static List<List<T>> transpose<T>(List<List<T>> m)
+        {
+            if (0 == m.Count)
+            {
+                return new List<List<T>>();
+            }
+            else
+            {
+                return Enumerable.Range(0, m[0].Count)
+                        .Select(i => m.Select(col => col[i]).ToList())
+                        .ToList();
+            }
+        }
+
     }
 }

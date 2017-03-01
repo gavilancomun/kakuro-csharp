@@ -81,5 +81,16 @@ namespace kakuro
             Assert.AreEqual(6, diff.Count);
         }
 
+        [Test]
+        public void testTranspose()
+        {
+            List<List<int>> ints = Enumerable.Range(0, 3)
+              .Select(i => Enumerable.Range(0, 4).ToList())
+              .ToList();
+            List<List<int>> tr = transpose(ints);
+            Assert.AreEqual(ints.Count, tr[0].Count);
+            Assert.AreEqual(ints[0].Count, tr.Count);
+        }
+
     }
 }
