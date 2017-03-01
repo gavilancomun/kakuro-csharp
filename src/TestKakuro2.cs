@@ -92,5 +92,12 @@ namespace kakuro
             Assert.AreEqual(ints[0].Count, tr.Count);
         }
 
+        [Test]
+        public void testValueEquality()
+        {
+            Assert.AreEqual(v(), v());
+            Assert.AreEqual(v(1, 2), v(1, 2));
+        }
+
     }
 }

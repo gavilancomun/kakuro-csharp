@@ -43,6 +43,16 @@ namespace kakuro.cell
             return values.Count;
         }
 
+        public override bool Equals(object obj)
+        {
+            ValueCell that = obj as ValueCell;
+            return this.values.SetEquals(that.values);
+        }
+
+        public override int GetHashCode()
+        {
+            return values.Sum();
+        }
     }
 
 }
