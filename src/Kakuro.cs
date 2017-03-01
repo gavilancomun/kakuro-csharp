@@ -45,5 +45,11 @@ namespace kakuro
             return new DownAcrossCell(d, a);
         }
 
+        public static String drawRow(List<Cell> row)
+        {
+            return row.Select(c => c.draw())
+                .Aggregate("", (acc, v) => acc + v) + "\n";
+        }
+
     }
 }

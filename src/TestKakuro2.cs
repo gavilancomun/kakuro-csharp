@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using kakuro.cell;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,13 @@ namespace kakuro
             Assert.AreEqual(" 12.......", result12);
         }
 
+        [Test]
+        public void testDrawRow()
+        {
+            List<Cell> line = new List<Cell> { da(3, 4), v(), v(1, 2), d(4), e(), a(5), v(4), v(1) };
+            String result = drawRow(line);
+            Assert.AreEqual("    3\\ 4   123456789 12.......    4\\--     -----     --\\ 5       4         1    \n", result);
+        }
 
     }
 }
