@@ -51,5 +51,56 @@ namespace kakuro
                 .Aggregate("", (acc, v) => acc + v) + "\n";
         }
 
+
+        public static String drawGrid(List<List<Cell>> grid)
+        {
+            return grid.Select(k => drawRow(k))
+                    .Aggregate("", (acc, v) => acc + v);
+        }
+
+        public static bool allDifferent<T>(ICollection<T> nums)
+        {
+            return nums.Count == new HashSet<T>(nums).Count;
+        }
+
+
+        public static List<T> conj<T>(List<T> items, T item)
+        {
+            List<T> result = new List<T>(items);
+            result.Add(item);
+            return result;
+        }
+
+        public static List<T> concatLists<T>(List<T> a, List<T> b)
+        {
+            return a.Concat(b).ToList();
+        }
+        public static HashSet<T> asSet<T>(params T[] values)
+        {
+            return new HashSet<T>(values);
+        }
+
+        public static List<T> asList<T>(params T[] values)
+        {
+            return new List<T>(values);
+        }
+
+        public static List<List<T>> product<T>(List<HashSet<T>> colls)
+        {
+            switch (colls.Count)
+            {
+                case 0:
+                    return new List<List<T>>();
+                case 1:
+                    return colls[0].Select(a => asList(a)).ToList();
+                default:
+                    ICollection<T> head = colls[0];
+                    List<HashSet<T>> tail = colls.Skip(1).ToList();
+                    List<List<T>> tailProd = product(tail);
+                    return head.SelectMany(x => tailProd.Select(ys => concatLists(asList(x), ys)))
+                            .ToList();
+            }
+        }
+
     }
 }

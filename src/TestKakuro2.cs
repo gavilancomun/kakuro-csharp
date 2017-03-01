@@ -51,9 +51,23 @@ namespace kakuro
         [Test]
         public void testDrawRow()
         {
-            List<Cell> line = new List<Cell> { da(3, 4), v(), v(1, 2), d(4), e(), a(5), v(4), v(1) };
+            List<Cell> line = asList<Cell>(da(3, 4), v(), v(1, 2), d(4), e(), a(5), v(4), v(1));
             String result = drawRow(line);
             Assert.AreEqual("    3\\ 4   123456789 12.......    4\\--     -----     --\\ 5       4         1    \n", result);
+        }
+
+        [Test]
+        public void testProduct()
+        {
+            List<HashSet<int>> data = asList(asSet(1, 2), asSet(10), asSet(100, 200, 300));
+            List<List<int>> expected = asList(
+              asList(1, 10, 100),
+              asList(1, 10, 200),
+              asList(1, 10, 300),
+              asList(2, 10, 100),
+              asList(2, 10, 200),
+              asList(2, 10, 300));
+            Assert.AreEqual(expected, product(data));
         }
 
     }
