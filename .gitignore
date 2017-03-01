@@ -6,3 +6,6 @@ obj/
 target/
 TestResult.xml
 
+# NuGet
+packages/
+

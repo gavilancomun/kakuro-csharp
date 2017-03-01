@@ -1,11 +1,8 @@
 # kakuro-csharp
-Porting gavilancomun/kakuro-explorer to C#
+Kakuro puzzle solver in C# with Antlr.
 
-Antlr4 for C# needs the Antlr4.Runtime.dll installed in the GAC.
-See https://github.com/antlr/antlr4-csharp
+Antlr support can be integrated into Visual Studio
 
-To generate the C# parser and lexer,
-```
-mvn antlr4:antlr4
-```
+    * https://github.com/tunnelvisionlabs/antlr4cs
+    * http://stackoverflow.com/questions/41401518/c-sharp-antlr-parser-does-not-implement-inherited-abstract-member-tokennames-get/41403473#41403473
 
