@@ -104,7 +104,7 @@ namespace kakuro
         public static List<List<int>> permuteAll(List<ValueCell> vs, int target)
         {
             List<SortedSet<int>> values = vs.Select(v => v.values).ToList();
-            return product(values).Where(x => target == x.Sum(n => n))
+            return product(values).Where(x => target == x.Sum())
                     .ToList();
         }
 
@@ -120,6 +120,11 @@ namespace kakuro
                         .Select(i => m.Select(col => col[i]).ToList())
                         .ToList();
             }
+        }
+
+        public static bool isPossible(ValueCell v, int n)
+        {
+            return v.Contains(n);
         }
 
     }

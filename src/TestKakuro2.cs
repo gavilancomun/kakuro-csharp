@@ -99,5 +99,13 @@ namespace kakuro
             Assert.AreEqual(v(1, 2), v(1, 2));
         }
 
+       [Test]
+public void testIsPoss()
+        {
+            ValueCell vc = v(1, 2, 3);
+            Assert.AreEqual(true, isPossible(vc, 2));
+            Assert.AreEqual(false, isPossible(vc, 4));
+        }
+
     }
 }

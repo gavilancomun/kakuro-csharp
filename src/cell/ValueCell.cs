@@ -30,7 +30,7 @@ namespace kakuro.cell
             System.Diagnostics.Debug.WriteLine("values " + values);
             if (1 == values.Count)
             {
-                return values.Select(v => "     " + v + "    ").ToList()[0];
+                return values.Select(v => "     " + v + "    ").First();
             }
             else
             {
@@ -53,6 +53,13 @@ namespace kakuro.cell
         {
             return values.Sum();
         }
+
+
+        public bool Contains(int n)
+        {
+            return values.Contains(n);
+        }
+
     }
 
 }
