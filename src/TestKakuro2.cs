@@ -148,5 +148,12 @@ namespace kakuro {
       Assert.AreEqual(3, result.Count);
     }
 
+    [Test]
+    public void testSolveStep() {
+      List<ValueCell> result = solveStep(asList(v(1, 2), v()), 5);
+      Assert.AreEqual(v(1, 2), result[0]);
+      Assert.AreEqual(v(3, 4), result[1]);
+    }
+
   }
 }

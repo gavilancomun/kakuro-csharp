@@ -147,5 +147,16 @@ namespace kakuro {
       return partitionAll(n, n, coll);
     }
 
+    public static List<ValueCell> solveStep(List<ValueCell> cells, int total) {
+      int finalIndex = cells.Count - 1;
+      var perms = permuteAll(cells, total)
+              .Where(v=>isPossible(cells.Last(), v[finalIndex]))
+              .Where(v => allDifferent(v))
+              .ToList();
+      return transpose(perms)
+              .Select(item => v(item))
+              .ToList();
+    }
+
   }
 }
