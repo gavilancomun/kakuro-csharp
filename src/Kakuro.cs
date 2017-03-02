@@ -150,12 +150,17 @@ namespace kakuro {
     public static List<ValueCell> solveStep(List<ValueCell> cells, int total) {
       int finalIndex = cells.Count - 1;
       var perms = permuteAll(cells, total)
-              .Where(v=>isPossible(cells.Last(), v[finalIndex]))
+              .Where(v => isPossible(cells.Last(), v[finalIndex]))
               .Where(v => allDifferent(v))
               .ToList();
       return transpose(perms)
               .Select(item => v(item))
               .ToList();
+    }
+
+    // returns (non-vals, vals)*
+    public static List<List<ICell>> gatherValues(List<ICell> line) {
+      return partitionBy(v => (v is ValueCell), line);
     }
 
   }
