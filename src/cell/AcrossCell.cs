@@ -1,6 +1,6 @@
 ﻿namespace kakuro.cell {
 
-  public struct AcrossCell : Cell, Across {
+  public struct AcrossCell : ICell, IAcross {
 
     private int total;
 

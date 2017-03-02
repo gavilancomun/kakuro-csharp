@@ -1,6 +1,6 @@
 ﻿namespace kakuro.cell {
 
-  public struct DownAcrossCell : Cell, Across, Down {
+  public struct DownAcrossCell : ICell, IAcross, IDown {
 
     private int down;
     private int across;

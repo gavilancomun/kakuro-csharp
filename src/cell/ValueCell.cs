@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace kakuro.cell
 {
 
-    public class ValueCell : Cell
+    public class ValueCell : ICell
     {
 
         public SortedSet<int> values { get; set; }

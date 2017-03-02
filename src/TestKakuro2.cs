@@ -43,7 +43,7 @@ namespace kakuro {
 
     [Test]
     public void testDrawRow() {
-      var line = asList<Cell>(da(3, 4), v(), v(1, 2), d(4), e(), a(5), v(4), v(1));
+      var line = asList<ICell>(da(3, 4), v(), v(1, 2), d(4), e(), a(5), v(4), v(1));
       String result = drawRow(line);
       Assert.AreEqual("    3\\ 4   123456789 12.......    4\\--     -----     --\\ 5       4         1    \n", result);
     }

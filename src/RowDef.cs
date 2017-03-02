@@ -6,7 +6,7 @@ namespace kakuro {
 
 public class RowDef {
 
-private List<Cell> cells = new List<Cell>();
+private List<ICell> cells = new List<ICell>();
 
 public RowDef() {
 }
@@ -44,11 +44,11 @@ public RowDef addDownAcross(int down, int across) {
   return this;
 }
 
-public Optional<Cell> this[int i] {
-  get { return (i >= cells.Count) ? Optional<Cell>.empty() : Optional<Cell>.ofNullable(cells[i]); }
+public Optional<ICell> this[int i] {
+  get { return (i >= cells.Count) ? Optional<ICell>.empty() : Optional<ICell>.ofNullable(cells[i]); }
 }
 
-public IEnumerable<Cell> Skip(int i) {
+public IEnumerable<ICell> Skip(int i) {
   return cells.Skip(i);
 }
 }

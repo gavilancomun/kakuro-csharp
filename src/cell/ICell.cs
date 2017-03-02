@@ -1,6 +1,6 @@
 ﻿namespace kakuro.cell {
 
-	public interface Cell {
+	public interface ICell {
 
 	string draw();
 

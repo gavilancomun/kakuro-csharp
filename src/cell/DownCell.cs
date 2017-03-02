@@ -1,6 +1,6 @@
 ﻿namespace kakuro.cell {
 
-  public struct DownCell : Cell, Down {
+  public struct DownCell : ICell, IDown {
 
     private int total;
 

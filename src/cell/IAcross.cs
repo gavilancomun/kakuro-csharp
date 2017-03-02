@@ -1,6 +1,6 @@
 ﻿namespace kakuro.cell {
 
-	public interface Across {
+	public interface IAcross {
 
 	int getAcrossTotal();
 

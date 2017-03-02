@@ -1,6 +1,6 @@
 ﻿namespace kakuro.cell {
 
-	public interface Down {
+	public interface IDown {
 
 	int getDownTotal();
 
