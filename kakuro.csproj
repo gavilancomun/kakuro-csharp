@@ -21,12 +21,7 @@
     <Compile Include="src\cell\ValueCell.cs" />
     <Compile Include="src\Pair.cs" />
     <Compile Include="src\Kakuro.cs" />
-    <Compile Include="src\GridController.cs" />
-    <Compile Include="src\Optional.cs" />
-    <Compile Include="src\Possible.cs" />
-    <Compile Include="src\RowDef.cs" />
     <Compile Include="src\SimplePair.cs" />
-    <Compile Include="src\Sum.cs" />
     <Compile Include="src\TestKakuro2.cs" />
   </ItemGroup>
   <ItemGroup>

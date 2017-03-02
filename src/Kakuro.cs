@@ -225,5 +225,16 @@ namespace kakuro {
       }
     }
 
+    public static void Main() {
+      var grid1 = asList(
+           asList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
+           asList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
+           asList<ICell>(a(18), v(), v(), v(), v(), v()),
+           asList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
+           asList<ICell>(a(9), v(), v(), a(6), v(), v()),
+           asList<ICell>(a(15), v(), v(), a(12), v(), v()));
+      var result = solver(grid1);
+    }
+
   }
 }
