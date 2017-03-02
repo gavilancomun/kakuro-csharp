@@ -163,5 +163,11 @@ namespace kakuro {
       return partitionBy(v => (v is ValueCell), line);
     }
 
+    public static List<SimplePair<List<ICell>>> pairTargetsWithValues(List<ICell> line) {
+      return partitionN(2, gatherValues(line))
+              .Select(part=> new SimplePair<List<ICell>>(part[0], (1 == part.Count) ? new List<ICell>() : part[1]))
+              .ToList();
+    }
+
   }
 }

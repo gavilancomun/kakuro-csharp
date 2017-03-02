@@ -166,5 +166,16 @@ namespace kakuro {
       Assert.AreEqual(a(4), result[2][2]);
     }
 
+    [Test]
+    public void testPairTargets() {
+      var line = asList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
+      var result = pairTargetsWithValues(line);
+      Assert.AreEqual(2, result.Count);
+      Assert.AreEqual(da(3, 4), result[0].left[0]);
+      Assert.AreEqual(d(4), result[1].left[0]);
+      Assert.AreEqual(e(), result[1].left[1]);
+      Assert.AreEqual(a(4), result[1].left[2]);
+    }
+
   }
 }
