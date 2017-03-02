@@ -10,10 +10,10 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="src\cell\Across.cs" />
+    <Compile Include="src\cell\IAcross.cs" />
     <Compile Include="src\cell\AcrossCell.cs" />
-    <Compile Include="src\cell\Cell.cs" />
-    <Compile Include="src\cell\Down.cs" />
+    <Compile Include="src\cell\ICell.cs" />
+    <Compile Include="src\cell\IDown.cs" />
     <Compile Include="src\cell\DownAcrossCell.cs" />
     <Compile Include="src\cell\DownCell.cs" />
     <Compile Include="src\cell\EmptyCell.cs" />
