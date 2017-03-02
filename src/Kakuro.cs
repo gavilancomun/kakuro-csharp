@@ -195,5 +195,35 @@ namespace kakuro {
       return solveLine(column, x => ((IDown)x).getDown());
     }
 
+    public static List<List<ICell>> solveGrid(List<List<ICell>> grid) {
+      var rowsDone = grid.Select(r => solveRow(r)).ToList();
+      var colsDone = transpose(rowsDone).Select(c => solveColumn(c)).ToList();
+      return transpose(colsDone);
+    }
+
+    public static bool gridEquals(List<List<ICell>> g1, List<List<ICell>> g2) {
+      if (g1.Count == g2.Count) {
+        return Enumerable.Range(0, g1.Count).All(i => {
+          var xi = g1[i];
+          var yi = g2[i];
+          return Enumerable.Range(0, xi.Count).All(j => (xi.Count == yi.Count) && xi[j].Equals(yi[j]));
+        });
+      }
+      else {
+        return false;
+      }
+    }
+
+    public static List<List<ICell>> solver(List<List<ICell>> grid) {
+      Console.WriteLine(drawGrid(grid));
+      var g = solveGrid(grid);
+      if (gridEquals(g, grid)) {
+        return g;
+      }
+      else {
+        return solver(g);
+      }
+    }
+
   }
 }
