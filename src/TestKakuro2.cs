@@ -199,5 +199,19 @@ namespace kakuro {
       Assert.AreEqual(v(1, 2, 3, 4), result[7]);
     }
 
+    [Test]
+    public void testSolveRow() {
+      var result = solveRow(asList<ICell>(a(3), v(1, 2, 3), v(1)));
+      Assert.AreEqual(v(2), result[1]);
+      Assert.AreEqual(v(1), result[2]);
+    }
+
+    [Test]
+    public void testSolveCol() {
+      var result = solveColumn(asList<ICell>(da(3, 12), v(1, 2, 3), v(1)));
+      Assert.AreEqual(v(2), result[1]);
+      Assert.AreEqual(v(1), result[2]);
+    }
+
   }
 }
