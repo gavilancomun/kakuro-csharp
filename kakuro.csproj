@@ -10,6 +10,7 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="src\AssemblyInfo1.cs" />
     <Compile Include="src\cell\IAcross.cs" />
     <Compile Include="src\cell\AcrossCell.cs" />
     <Compile Include="src\cell\ICell.cs" />
