@@ -12,7 +12,7 @@
       return string.Format("   --\\{0,2:D}  ", total);
     }
 
-    public int getAcrossTotal() {
+    public int getAcross() {
       return total;
     }
 

@@ -2,7 +2,7 @@
 
 	public interface IDown {
 
-	int getDownTotal();
+	int getDown();
 
 	}
 

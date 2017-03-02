@@ -165,8 +165,20 @@ namespace kakuro {
 
     public static List<SimplePair<List<ICell>>> pairTargetsWithValues(List<ICell> line) {
       return partitionN(2, gatherValues(line))
-              .Select(part=> new SimplePair<List<ICell>>(part[0], (1 == part.Count) ? new List<ICell>() : part[1]))
+              .Select(part => new SimplePair<List<ICell>>(part[0], (1 == part.Count) ? new List<ICell>() : part[1]))
               .ToList();
+    }
+
+    public static List<ICell> solvePair(Func<ICell, int> f, SimplePair<List<ICell>> pair) {
+      var notValueCells = pair.left;
+      if (0 == pair.right.Count) {
+        return notValueCells;
+      }
+      else {
+        var valueCells = pair.right.Select(cell => (ValueCell)cell).ToList();
+        var newValueCells = solveStep(valueCells, f.Invoke(notValueCells.Last()));
+        return notValueCells.Concat(newValueCells).ToList();
+      }
     }
 
   }

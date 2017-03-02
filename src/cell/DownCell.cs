@@ -12,7 +12,7 @@
       return string.Format("   {0,2:D}\\--  ", total);
     }
 
-    public int getDownTotal() {
+    public int getDown() {
       return total;
     }
 

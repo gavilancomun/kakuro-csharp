@@ -48,7 +48,7 @@ namespace kakuro {
       foreach (RowDef row in rows) {
         foreach (var c in Enumerable.Range(0, rows[0].size())) {
           foreach (var cell in row[c].Where(cell => cell is IAcross)) {
-            sums.Add(new Sum(((IAcross)cell).getAcrossTotal(),
+            sums.Add(new Sum(((IAcross)cell).getAcross(),
               row.Skip(c + 1)
               .TakeWhile(v => v is ValueCell)
               .Cast<ValueCell>()
@@ -75,7 +75,7 @@ namespace kakuro {
                 }
               }
             }
-            sums.Add(new Sum(((IDown)cell).getDownTotal(), vs));
+            sums.Add(new Sum(((IDown)cell).getDown(), vs));
           }
         }
       }

@@ -2,7 +2,7 @@
 
 	public interface IAcross {
 
-	int getAcrossTotal();
+	int getAcross();
 
 	}
 

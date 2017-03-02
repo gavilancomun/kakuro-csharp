@@ -177,5 +177,16 @@ namespace kakuro {
       Assert.AreEqual(a(4), result[1].left[2]);
     }
 
+    [Test]
+    public void testSolvePair() {
+      var line = asList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
+      var pairs = pairTargetsWithValues(line);
+      var pair = pairs[0];
+      var result = solvePair(cell => ((IDown)cell).getDown(), pair);
+      Assert.AreEqual(3, result.Count);
+      Assert.AreEqual(v(1, 2), result[1]);
+      Assert.AreEqual(v(1, 2), result[2]);
+    }
+
   }
 }

@@ -14,11 +14,11 @@
       return string.Format("   {0,2:D}\\{1,2:D}  ", down, across);
     }
 
-    public int getAcrossTotal() {
+    public int getAcross() {
       return across;
     }
 
-    public int getDownTotal() {
+    public int getDown() {
       return down;
     }
 
