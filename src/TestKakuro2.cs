@@ -134,5 +134,19 @@ namespace kakuro {
       Assert.AreEqual(9, result.Count);
     }
 
+    [Test]
+    public void testPartAll() {
+      var data = asList(1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9);
+      var result = partitionAll(5, 3, data);
+      Assert.AreEqual(5, result.Count);
+    }
+
+    [Test]
+    public void testPartN() {
+      var data = asList(1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9);
+      var result = partitionN(5, data);
+      Assert.AreEqual(3, result.Count);
+    }
+
   }
 }

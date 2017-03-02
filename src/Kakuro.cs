@@ -121,6 +121,7 @@ namespace kakuro {
     public static List<T> take<T>(int n, List<T> coll) {
       return coll.Take(n).ToList();
     }
+
     public static List<List<T>> partitionBy<T>(Predicate<T> f, List<T> coll) {
       if (0 == coll.Count) {
         return Enumerable.Empty<List<T>>().ToList();
@@ -133,6 +134,18 @@ namespace kakuro {
       }
     }
 
+    public static List<List<T>> partitionAll<T>(int n, int step, List<T> coll) {
+      if (0 == coll.Count) {
+        return Enumerable.Empty<List<T>>().ToList();
+      }
+      else {
+        return concatLists(asList(take(n, coll)), partitionAll(n, step, drop(step, coll)));
+      }
+    }
+
+    public static List<List<T>> partitionN<T>(int n, List<T> coll) {
+      return partitionAll(n, n, coll);
+    }
 
   }
 }
