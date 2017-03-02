@@ -19,7 +19,6 @@ namespace kakuro {
       return v(values.ToList());
     }
 
-
     public static EmptyCell e() {
       return new EmptyCell();
     }
@@ -114,6 +113,26 @@ namespace kakuro {
         }
       }
     }
+
+    public static List<T> drop<T>(int n, List<T> coll) {
+      return coll.Skip(n).ToList();
+    }
+
+    public static List<T> take<T>(int n, List<T> coll) {
+      return coll.Take(n).ToList();
+    }
+    public static List<List<T>> partitionBy<T>(Predicate<T> f, List<T> coll) {
+      if (0 == coll.Count) {
+        return Enumerable.Empty<List<T>>().ToList();
+      }
+      else {
+        T head = coll[0];
+        bool fx = f.Invoke(head);
+        List<T> group = takeWhile(y => fx == f.Invoke(y), coll).ToList();
+        return concatLists(asList(group), partitionBy(f, drop(group.Count, coll)));
+      }
+    }
+
 
   }
 }

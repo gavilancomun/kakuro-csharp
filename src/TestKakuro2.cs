@@ -105,5 +105,34 @@ namespace kakuro {
       Assert.AreEqual(4, result.Count);
     }
 
+    [Test]
+    public void testConcat() {
+      var a = asList(1, 2, 3);
+      var b = asList(4, 5, 6, 1, 2, 3);
+      var result = concatLists(a, b);
+      Assert.AreEqual(9, result.Count);
+    }
+
+    [Test]
+    public void testDrop() {
+      var a = asList(1, 2, 3, 4, 5, 6);
+      var result = drop(4, a);
+      Assert.AreEqual(2, result.Count);
+    }
+
+    [Test]
+    public void testTake() {
+      var a = asList(1, 2, 3, 4, 5, 6);
+      var result = take(4, a);
+      Assert.AreEqual(4, result.Count);
+    }
+
+    [Test]
+    public void testPartBy() {
+      var data = asList(1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9);
+      var result = partitionBy(n => 0 == (n % 2), data);
+      Assert.AreEqual(9, result.Count);
+    }
+
   }
 }
