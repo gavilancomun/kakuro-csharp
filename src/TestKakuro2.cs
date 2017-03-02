@@ -188,5 +188,16 @@ namespace kakuro {
       Assert.AreEqual(v(1, 2), result[2]);
     }
 
+    [Test]
+    public void testSolveLine() {
+      var line = asList<ICell>(da(3, 4), v(), v(), d(4), e(), a(5), v(), v());
+      var result = solveLine(line, x => ((IAcross)x).getAcross());
+      Assert.AreEqual(8, result.Count);
+      Assert.AreEqual(v(1, 3), result[1]);
+      Assert.AreEqual(v(1, 3), result[2]);
+      Assert.AreEqual(v(1, 2, 3, 4), result[6]);
+      Assert.AreEqual(v(1, 2, 3, 4), result[7]);
+    }
+
   }
 }

@@ -181,5 +181,11 @@ namespace kakuro {
       }
     }
 
+    public static List<ICell> solveLine(List<ICell> line, Func<ICell, int> f) {
+      return pairTargetsWithValues(line)
+              .SelectMany(pair=>solvePair(f, pair))
+              .ToList();
+    }
+
   }
 }
