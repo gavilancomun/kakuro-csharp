@@ -213,7 +213,7 @@ namespace kakuro {
       }
     }
 
-    public static List<List<ICell>> solver(IList<List<ICell>> grid) {
+    public static IList<List<ICell>> solver(IList<List<ICell>> grid) {
       Console.WriteLine(drawGrid(grid));
       var g = solveGrid(grid);
       if (gridEquals(g, grid)) {
