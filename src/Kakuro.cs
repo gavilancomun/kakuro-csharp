@@ -34,13 +34,13 @@ namespace kakuro {
       return new DownAcrossCell(d, a);
     }
 
-    public static String drawRow(IList<ICell> row) {
+    public static string drawRow(IList<ICell> row) {
       return row.Select(c => c.draw())
           .Aggregate("", (acc, v) => acc + v) + "\n";
     }
 
 
-    public static String drawGrid(IList<List<ICell>> grid) {
+    public static string drawGrid(IList<List<ICell>> grid) {
       return grid.Select(k => drawRow(k))
               .Aggregate("", (acc, v) => acc + v);
     }
