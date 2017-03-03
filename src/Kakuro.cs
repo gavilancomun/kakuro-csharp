@@ -50,7 +50,7 @@ namespace kakuro {
     }
 
 
-    public static List<T> conj<T>(IList<T> items, T item) {
+    public static IList<T> conj<T>(IList<T> items, T item) {
       List<T> result = new List<T>(items);
       result.Add(item);
       return result;
@@ -67,7 +67,7 @@ namespace kakuro {
       return new List<T>(values);
     }
 
-    public static List<List<T>> product<T>(List<ISet<T>> colls) {
+    public static IList<List<T>> product<T>(List<ISet<T>> colls) {
       switch (colls.Count) {
         case 0:
           return new List<List<T>>();
@@ -81,13 +81,13 @@ namespace kakuro {
                   .ToList();
       }
     }
-    public static List<List<int>> permuteAll(IList<ValueCell> vs, int target) {
+    public static IList<List<int>> permuteAll(IList<ValueCell> vs, int target) {
       var values = vs.Select(v => v.values).ToList();
       return product(values).Where(x => target == x.Sum())
               .ToList();
     }
 
-    public static List<List<T>> transpose<T>(IList<List<T>> m) {
+    public static IList<List<T>> transpose<T>(IList<List<T>> m) {
       if (0 == m.Count) {
         return new List<List<T>>();
       }
@@ -194,7 +194,7 @@ namespace kakuro {
       return solveLine(column, x => ((IDown)x).getDown());
     }
 
-    public static List<List<ICell>> solveGrid(IList<List<ICell>> grid) {
+    public static IList<List<ICell>> solveGrid(IList<List<ICell>> grid) {
       var rowsDone = grid.Select(r => solveRow(r)).ToList();
       var colsDone = transpose(rowsDone).Select(c => solveColumn(c)).ToList();
       return transpose(colsDone);
