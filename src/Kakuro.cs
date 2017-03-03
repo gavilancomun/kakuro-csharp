@@ -34,14 +34,14 @@ namespace kakuro {
       return new DownAcrossCell(d, a);
     }
 
-    public static string drawRow(IList<ICell> row) {
+    public static string DrawRow(IList<ICell> row) {
       return row.Select(c => c.draw())
           .Aggregate("", (acc, v) => acc + v) + "\n";
     }
 
 
-    public static string drawGrid(IList<List<ICell>> grid) {
-      return grid.Select(k => drawRow(k))
+    public static string DrawGrid(IList<List<ICell>> grid) {
+      return grid.Select(k => DrawRow(k))
               .Aggregate("", (acc, v) => acc + v);
     }
 
@@ -59,35 +59,35 @@ namespace kakuro {
     public static List<T> concatLists<T>(IList<T> a, IList<T> b) {
       return a.Concat(b).ToList();
     }
-    public static ISet<T> asSet<T>(params T[] values) {
+    public static ISet<T> AsSet<T>(params T[] values) {
       return new SortedSet<T>(values);
     }
 
-    public static List<T> asList<T>(params T[] values) {
+    public static List<T> AsList<T>(params T[] values) {
       return new List<T>(values);
     }
 
-    public static IList<List<T>> product<T>(List<ISet<T>> colls) {
+    public static IList<List<T>> Product<T>(List<ISet<T>> colls) {
       switch (colls.Count) {
         case 0:
           return new List<List<T>>();
         case 1:
-          return colls[0].Select(a => asList(a)).ToList();
+          return colls[0].Select(a => AsList(a)).ToList();
         default:
           var head = colls[0];
           var tail = colls.Skip(1).ToList();
-          var tailProd = product(tail);
-          return head.SelectMany(x => tailProd.Select(ys => concatLists(asList(x), ys)))
+          var tailProd = Product(tail);
+          return head.SelectMany(x => tailProd.Select(ys => concatLists(AsList(x), ys)))
                   .ToList();
       }
     }
-    public static IList<List<int>> permuteAll(IList<ValueCell> vs, int target) {
+    public static IList<List<int>> PermuteAll(IList<ValueCell> vs, int target) {
       var values = vs.Select(v => v.values).ToList();
-      return product(values).Where(x => target == x.Sum())
+      return Product(values).Where(x => target == x.Sum())
               .ToList();
     }
 
-    public static IList<List<T>> transpose<T>(IList<List<T>> m) {
+    public static IList<List<T>> Transpose<T>(IList<List<T>> m) {
       if (0 == m.Count) {
         return new List<List<T>>();
       }
@@ -98,11 +98,11 @@ namespace kakuro {
       }
     }
 
-    public static bool isPossible(ValueCell v, int n) {
+    public static bool IsPossible(ValueCell v, int n) {
       return v.Contains(n);
     }
 
-    public static IEnumerable<T> takeWhile<T>(Predicate<T> f, IList<T> coll) {
+    public static IEnumerable<T> TakeWhile<T>(Predicate<T> f, IList<T> coll) {
       foreach (var item in coll) {
         if (f.Invoke(item)) {
           yield return item;
@@ -113,94 +113,94 @@ namespace kakuro {
       }
     }
 
-    public static List<T> drop<T>(int n, IList<T> coll) {
+    public static List<T> Drop<T>(int n, IList<T> coll) {
       return coll.Skip(n).ToList();
     }
 
-    public static List<T> take<T>(int n, IList<T> coll) {
+    public static List<T> Take<T>(int n, IList<T> coll) {
       return coll.Take(n).ToList();
     }
 
-    public static List<List<T>> partitionBy<T>(Predicate<T> f, IList<T> coll) {
+    public static List<List<T>> PartitionBy<T>(Predicate<T> f, IList<T> coll) {
       if (0 == coll.Count) {
         return Enumerable.Empty<List<T>>().ToList();
       }
       else {
         T head = coll[0];
         bool fx = f.Invoke(head);
-        var group = takeWhile(y => fx == f.Invoke(y), coll).ToList();
-        return concatLists(asList(group), partitionBy(f, drop(group.Count, coll)));
+        var group = TakeWhile(y => fx == f.Invoke(y), coll).ToList();
+        return concatLists(AsList(group), PartitionBy(f, Drop(group.Count, coll)));
       }
     }
 
-    public static List<List<T>> partitionAll<T>(int n, int step, IList<T> coll) {
+    public static List<List<T>> PartitionAll<T>(int n, int step, IList<T> coll) {
       if (0 == coll.Count) {
         return Enumerable.Empty<List<T>>().ToList();
       }
       else {
-        return concatLists(asList(take(n, coll)), partitionAll(n, step, drop(step, coll)));
+        return concatLists(AsList(Take(n, coll)), PartitionAll(n, step, Drop(step, coll)));
       }
     }
 
-    public static List<List<T>> partitionN<T>(int n, IList<T> coll) {
-      return partitionAll(n, n, coll);
+    public static List<List<T>> PartitionN<T>(int n, IList<T> coll) {
+      return PartitionAll(n, n, coll);
     }
 
-    public static List<ValueCell> solveStep(IList<ValueCell> cells, int total) {
+    public static List<ValueCell> SolveStep(IList<ValueCell> cells, int total) {
       int finalIndex = cells.Count - 1;
-      var perms = permuteAll(cells, total)
-              .Where(v => isPossible(cells.Last(), v[finalIndex]))
+      var perms = PermuteAll(cells, total)
+              .Where(v => IsPossible(cells.Last(), v[finalIndex]))
               .Where(v => allDifferent(v))
               .ToList();
-      return transpose(perms)
+      return Transpose(perms)
               .Select(item => v(item))
               .ToList();
     }
 
     // returns (non-vals, vals)*
-    public static List<List<ICell>> gatherValues(IList<ICell> line) {
-      return partitionBy(v => (v is ValueCell), line);
+    public static List<List<ICell>> GatherValues(IList<ICell> line) {
+      return PartitionBy(v => (v is ValueCell), line);
     }
 
-    public static List<SimplePair<List<ICell>>> pairTargetsWithValues(IList<ICell> line) {
-      return partitionN(2, gatherValues(line))
+    public static List<SimplePair<List<ICell>>> PairTargetsWithValues(IList<ICell> line) {
+      return PartitionN(2, GatherValues(line))
               .Select(part => new SimplePair<List<ICell>>(part[0], (1 == part.Count) ? new List<ICell>() : part[1]))
               .ToList();
     }
 
-    public static List<ICell> solvePair(Func<ICell, int> f, SimplePair<List<ICell>> pair) {
+    public static List<ICell> SolvePair(Func<ICell, int> f, SimplePair<List<ICell>> pair) {
       var notValueCells = pair.left;
       if (0 == pair.right.Count) {
         return notValueCells;
       }
       else {
         var valueCells = pair.right.Select(cell => (ValueCell)cell).ToList();
-        var newValueCells = solveStep(valueCells, f.Invoke(notValueCells.Last()));
+        var newValueCells = SolveStep(valueCells, f.Invoke(notValueCells.Last()));
         return notValueCells.Concat(newValueCells).ToList();
       }
     }
 
-    public static List<ICell> solveLine(IList<ICell> line, Func<ICell, int> f) {
-      return pairTargetsWithValues(line)
-              .SelectMany(pair => solvePair(f, pair))
+    public static List<ICell> SolveLine(IList<ICell> line, Func<ICell, int> f) {
+      return PairTargetsWithValues(line)
+              .SelectMany(pair => SolvePair(f, pair))
               .ToList();
     }
 
-    public static List<ICell> solveRow(IList<ICell> row) {
-      return solveLine(row, x => ((IAcross)x).getAcross());
+    public static List<ICell> SolveRow(IList<ICell> row) {
+      return SolveLine(row, x => ((IAcross)x).getAcross());
     }
 
-    public static List<ICell> solveColumn(IList<ICell> column) {
-      return solveLine(column, x => ((IDown)x).getDown());
+    public static List<ICell> SolveColumn(IList<ICell> column) {
+      return SolveLine(column, x => ((IDown)x).getDown());
     }
 
-    public static IList<List<ICell>> solveGrid(IList<List<ICell>> grid) {
-      var rowsDone = grid.Select(r => solveRow(r)).ToList();
-      var colsDone = transpose(rowsDone).Select(c => solveColumn(c)).ToList();
-      return transpose(colsDone);
+    public static IList<List<ICell>> SolveGrid(IList<List<ICell>> grid) {
+      var rowsDone = grid.Select(r => SolveRow(r)).ToList();
+      var colsDone = Transpose(rowsDone).Select(c => SolveColumn(c)).ToList();
+      return Transpose(colsDone);
     }
 
-    public static bool gridEquals(IList<List<ICell>> g1, IList<List<ICell>> g2) {
+    public static bool GridEquals(IList<List<ICell>> g1, IList<List<ICell>> g2) {
       if (g1.Count == g2.Count) {
         return Enumerable.Range(0, g1.Count).All(i => {
           var xi = g1[i];
@@ -213,26 +213,26 @@ namespace kakuro {
       }
     }
 
-    public static IList<List<ICell>> solver(IList<List<ICell>> grid) {
-      Console.WriteLine(drawGrid(grid));
-      var g = solveGrid(grid);
-      if (gridEquals(g, grid)) {
+    public static IList<List<ICell>> Solver(IList<List<ICell>> grid) {
+      Console.WriteLine(DrawGrid(grid));
+      var g = SolveGrid(grid);
+      if (GridEquals(g, grid)) {
         return g;
       }
       else {
-        return solver(g);
+        return Solver(g);
       }
     }
 
     public static void Main() {
-      var grid1 = asList(
-           asList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
-           asList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-           asList<ICell>(a(18), v(), v(), v(), v(), v()),
-           asList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-           asList<ICell>(a(9), v(), v(), a(6), v(), v()),
-           asList<ICell>(a(15), v(), v(), a(12), v(), v()));
-      var result = solver(grid1);
+      var grid1 = AsList(
+           AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
+           AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
+           AsList<ICell>(a(18), v(), v(), v(), v(), v()),
+           AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
+           AsList<ICell>(a(9), v(), v(), a(6), v(), v()),
+           AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+      var result = Solver(grid1);
     }
 
   }

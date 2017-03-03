@@ -43,28 +43,28 @@ namespace kakuro {
 
     [Test]
     public void testDrawRow() {
-      var line = asList<ICell>(da(3, 4), v(), v(1, 2), d(4), e(), a(5), v(4), v(1));
-      String result = drawRow(line);
+      var line = AsList<ICell>(da(3, 4), v(), v(1, 2), d(4), e(), a(5), v(4), v(1));
+      String result = DrawRow(line);
       Assert.AreEqual("    3\\ 4   123456789 12.......    4\\--     -----     --\\ 5       4         1    \n", result);
     }
 
     [Test]
     public void testProduct() {
-      var data = asList(asSet(1, 2), asSet(10), asSet(100, 200, 300));
-      var expected = asList(
-        asList(1, 10, 100),
-        asList(1, 10, 200),
-        asList(1, 10, 300),
-        asList(2, 10, 100),
-        asList(2, 10, 200),
-        asList(2, 10, 300));
-      Assert.AreEqual(expected, product(data));
+      var data = AsList(AsSet(1, 2), AsSet(10), AsSet(100, 200, 300));
+      var expected = AsList(
+        AsList(1, 10, 100),
+        AsList(1, 10, 200),
+        AsList(1, 10, 300),
+        AsList(2, 10, 100),
+        AsList(2, 10, 200),
+        AsList(2, 10, 300));
+      Assert.AreEqual(expected, Product(data));
     }
 
     [Test]
     public void testPermute() {
-      var vs = asList(v(), v(), v());
-      var results = permuteAll(vs, 6);
+      var vs = AsList(v(), v(), v());
+      var results = PermuteAll(vs, 6);
       Assert.AreEqual(10, results.Count);
       var diff = results.Where(k => allDifferent(k)).ToList();
       Assert.AreEqual(6, diff.Count);
@@ -75,7 +75,7 @@ namespace kakuro {
       var ints = Enumerable.Range(0, 3)
         .Select(i => Enumerable.Range(0, 4).ToList())
         .ToList();
-      var tr = transpose(ints);
+      var tr = Transpose(ints);
       Assert.AreEqual(ints.Count, tr[0].Count);
       Assert.AreEqual(ints[0].Count, tr.Count);
     }
@@ -89,76 +89,76 @@ namespace kakuro {
     [Test]
     public void testIsPoss() {
       var vc = v(1, 2, 3);
-      Assert.AreEqual(true, isPossible(vc, 2));
-      Assert.AreEqual(false, isPossible(vc, 4));
+      Assert.AreEqual(true, IsPossible(vc, 2));
+      Assert.AreEqual(false, IsPossible(vc, 4));
     }
 
     [Test]
     public void testTakeWhile() {
-      var result = takeWhile(n => n < 4, Enumerable.Range(0, 10).ToList()).ToList();
+      var result = TakeWhile(n => n < 4, Enumerable.Range(0, 10).ToList()).ToList();
       Assert.AreEqual(4, result.Count);
     }
 
     [Test]
     public void testTakeWhile2() {
-      var result = takeWhile(n => (n < 4) || (n > 6), Enumerable.Range(0, 10).ToList()).ToList();
+      var result = TakeWhile(n => (n < 4) || (n > 6), Enumerable.Range(0, 10).ToList()).ToList();
       Assert.AreEqual(4, result.Count);
     }
 
     [Test]
     public void testConcat() {
-      var a = asList(1, 2, 3);
-      var b = asList(4, 5, 6, 1, 2, 3);
+      var a = AsList(1, 2, 3);
+      var b = AsList(4, 5, 6, 1, 2, 3);
       var result = concatLists(a, b);
       Assert.AreEqual(9, result.Count);
     }
 
     [Test]
     public void testDrop() {
-      var a = asList(1, 2, 3, 4, 5, 6);
-      var result = drop(4, a);
+      var a = AsList(1, 2, 3, 4, 5, 6);
+      var result = Drop(4, a);
       Assert.AreEqual(2, result.Count);
     }
 
     [Test]
     public void testTake() {
-      var a = asList(1, 2, 3, 4, 5, 6);
-      var result = take(4, a);
+      var a = AsList(1, 2, 3, 4, 5, 6);
+      var result = Take(4, a);
       Assert.AreEqual(4, result.Count);
     }
 
     [Test]
     public void testPartBy() {
-      var data = asList(1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9);
-      var result = partitionBy(n => 0 == (n % 2), data);
+      var data = AsList(1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9);
+      var result = PartitionBy(n => 0 == (n % 2), data);
       Assert.AreEqual(9, result.Count);
     }
 
     [Test]
     public void testPartAll() {
-      var data = asList(1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9);
-      var result = partitionAll(5, 3, data);
+      var data = AsList(1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9);
+      var result = PartitionAll(5, 3, data);
       Assert.AreEqual(5, result.Count);
     }
 
     [Test]
     public void testPartN() {
-      var data = asList(1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9);
-      var result = partitionN(5, data);
+      var data = AsList(1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9);
+      var result = PartitionN(5, data);
       Assert.AreEqual(3, result.Count);
     }
 
     [Test]
     public void testSolveStep() {
-      List<ValueCell> result = solveStep(asList(v(1, 2), v()), 5);
+      List<ValueCell> result = SolveStep(AsList(v(1, 2), v()), 5);
       Assert.AreEqual(v(1, 2), result[0]);
       Assert.AreEqual(v(3, 4), result[1]);
     }
 
     [Test]
     public void testGatherValues() {
-      var line = asList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
-      var result = gatherValues(line);
+      var line = AsList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
+      var result = GatherValues(line);
       Assert.AreEqual(4, result.Count);
       Assert.AreEqual(da(3, 4), result[0][0]);
       Assert.AreEqual(d(4), result[2][0]);
@@ -168,8 +168,8 @@ namespace kakuro {
 
     [Test]
     public void testPairTargets() {
-      var line = asList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
-      var result = pairTargetsWithValues(line);
+      var line = AsList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
+      var result = PairTargetsWithValues(line);
       Assert.AreEqual(2, result.Count);
       Assert.AreEqual(da(3, 4), result[0].left[0]);
       Assert.AreEqual(d(4), result[1].left[0]);
@@ -179,10 +179,10 @@ namespace kakuro {
 
     [Test]
     public void testSolvePair() {
-      var line = asList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
-      var pairs = pairTargetsWithValues(line);
+      var line = AsList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
+      var pairs = PairTargetsWithValues(line);
       var pair = pairs[0];
-      var result = solvePair(cell => ((IDown)cell).getDown(), pair);
+      var result = SolvePair(cell => ((IDown)cell).getDown(), pair);
       Assert.AreEqual(3, result.Count);
       Assert.AreEqual(v(1, 2), result[1]);
       Assert.AreEqual(v(1, 2), result[2]);
@@ -190,8 +190,8 @@ namespace kakuro {
 
     [Test]
     public void testSolveLine() {
-      var line = asList<ICell>(da(3, 4), v(), v(), d(4), e(), a(5), v(), v());
-      var result = solveLine(line, x => ((IAcross)x).getAcross());
+      var line = AsList<ICell>(da(3, 4), v(), v(), d(4), e(), a(5), v(), v());
+      var result = SolveLine(line, x => ((IAcross)x).getAcross());
       Assert.AreEqual(8, result.Count);
       Assert.AreEqual(v(1, 3), result[1]);
       Assert.AreEqual(v(1, 3), result[2]);
@@ -201,89 +201,89 @@ namespace kakuro {
 
     [Test]
     public void testSolveRow() {
-      var result = solveRow(asList<ICell>(a(3), v(1, 2, 3), v(1)));
+      var result = SolveRow(AsList<ICell>(a(3), v(1, 2, 3), v(1)));
       Assert.AreEqual(v(2), result[1]);
       Assert.AreEqual(v(1), result[2]);
     }
 
     [Test]
     public void testSolveCol() {
-      var result = solveColumn(asList<ICell>(da(3, 12), v(1, 2, 3), v(1)));
+      var result = SolveColumn(AsList<ICell>(da(3, 12), v(1, 2, 3), v(1)));
       Assert.AreEqual(v(2), result[1]);
       Assert.AreEqual(v(1), result[2]);
     }
 
     [Test]
     public void testGridEquals() {
-      var grid1 = asList(
-              asList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
-              asList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-              asList<ICell>(a(18), v(), v(), v(), v(), v()),
-              asList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-              asList<ICell>(a(9), v(), v(), a(6), v(), v()),
-              asList<ICell>(a(15), v(), v(), a(12), v(), v()));
-      var grid2 = asList(
-              asList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
-              asList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-              asList<ICell>(a(18), v(), v(), v(), v(), v()),
-              asList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-              asList<ICell>(a(9), v(), v(), a(6), v(), v()),
-              asList<ICell>(a(15), v(), v(), a(12), v(), v()));
-      Assert.AreEqual(true, gridEquals(grid1, grid2));
+      var grid1 = AsList(
+              AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
+              AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
+              AsList<ICell>(a(18), v(), v(), v(), v(), v()),
+              AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
+              AsList<ICell>(a(9), v(), v(), a(6), v(), v()),
+              AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+      var grid2 = AsList(
+              AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
+              AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
+              AsList<ICell>(a(18), v(), v(), v(), v(), v()),
+              AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
+              AsList<ICell>(a(9), v(), v(), a(6), v(), v()),
+              AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+      Assert.AreEqual(true, GridEquals(grid1, grid2));
     }
 
     [Test]
     public void testGridEquals2() {
-      var grid1 = asList(
-              asList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
-              asList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-              asList<ICell>(a(18), v(), v(), v(), v(), v()),
-              asList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-              asList<ICell>(a(9), v(), v(), a(6), v(), v()),
-              asList<ICell>(a(15), v(), v(), a(12), v(), v()));
-      var grid2 = asList(
-              asList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
-              asList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-              asList<ICell>(a(18), v(), v(), v(), v(), v()),
-              asList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-              asList<ICell>(a(15), v(), v(), a(12), v(), v()));
-      Assert.AreEqual(false, gridEquals(grid1, grid2));
+      var grid1 = AsList(
+              AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
+              AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
+              AsList<ICell>(a(18), v(), v(), v(), v(), v()),
+              AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
+              AsList<ICell>(a(9), v(), v(), a(6), v(), v()),
+              AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+      var grid2 = AsList(
+              AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
+              AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
+              AsList<ICell>(a(18), v(), v(), v(), v(), v()),
+              AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
+              AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+      Assert.AreEqual(false, GridEquals(grid1, grid2));
     }
 
     [Test]
     public void testGridEquals3() {
-      var grid1 = asList(
-              asList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
-              asList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-              asList<ICell>(a(18), v(), v(), v(), v(), v()),
-              asList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-              asList<ICell>(a(9), v(), v(), a(6), v(), v()),
-              asList<ICell>(a(15), v(), v(), a(12), v(), v()));
-      var grid2 = asList(
-              asList<ICell>(e(), d(4), d(22), e(), d(16)),
-              asList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-              asList<ICell>(a(18), v(), v(), v(), v(), v()),
-              asList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-              asList<ICell>(a(9), v(), v(), a(6), v(), v()),
-              asList<ICell>(a(15), v(), v(), a(12), v(), v()));
-      Assert.AreEqual(false, gridEquals(grid1, grid2));
+      var grid1 = AsList(
+              AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
+              AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
+              AsList<ICell>(a(18), v(), v(), v(), v(), v()),
+              AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
+              AsList<ICell>(a(9), v(), v(), a(6), v(), v()),
+              AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+      var grid2 = AsList(
+              AsList<ICell>(e(), d(4), d(22), e(), d(16)),
+              AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
+              AsList<ICell>(a(18), v(), v(), v(), v(), v()),
+              AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
+              AsList<ICell>(a(9), v(), v(), a(6), v(), v()),
+              AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+      Assert.AreEqual(false, GridEquals(grid1, grid2));
     }
 
     [Test]
     public void testSolver() {
-      var grid1 = asList(
-              asList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
-              asList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-              asList<ICell>(a(18), v(), v(), v(), v(), v()),
-              asList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-              asList<ICell>(a(9), v(), v(), a(6), v(), v()),
-              asList<ICell>(a(15), v(), v(), a(12), v(), v()));
-            var result = solver(grid1);
-            Assert.AreEqual("   --\\ 3       1         2       16\\ 6       4         2    \n", drawRow(result[1]));
-            Assert.AreEqual("   --\\18       3         5         7         2         1    \n", drawRow(result[2]));
-            Assert.AreEqual("   -----     17\\23       8         9         6       14\\--  \n", drawRow(result[3]));
-            Assert.AreEqual("   --\\ 9       8         1       --\\ 6       1         5    \n", drawRow(result[4]));
-            Assert.AreEqual("   --\\15       9         6       --\\12       3         9    \n", drawRow(result[5]));
+      var grid1 = AsList(
+              AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
+              AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
+              AsList<ICell>(a(18), v(), v(), v(), v(), v()),
+              AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
+              AsList<ICell>(a(9), v(), v(), a(6), v(), v()),
+              AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+      var result = Solver(grid1);
+      Assert.AreEqual("   --\\ 3       1         2       16\\ 6       4         2    \n", DrawRow(result[1]));
+      Assert.AreEqual("   --\\18       3         5         7         2         1    \n", DrawRow(result[2]));
+      Assert.AreEqual("   -----     17\\23       8         9         6       14\\--  \n", DrawRow(result[3]));
+      Assert.AreEqual("   --\\ 9       8         1       --\\ 6       1         5    \n", DrawRow(result[4]));
+      Assert.AreEqual("   --\\15       9         6       --\\12       3         9    \n", DrawRow(result[5]));
     }
 
   }
