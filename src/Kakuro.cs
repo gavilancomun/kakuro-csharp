@@ -133,7 +133,7 @@ namespace kakuro {
       }
     }
 
-    public static List<List<T>> partitionAll<T>(int n, int step, List<T> coll) {
+    public static List<List<T>> partitionAll<T>(int n, int step, IList<T> coll) {
       if (0 == coll.Count) {
         return Enumerable.Empty<List<T>>().ToList();
       }
@@ -142,11 +142,11 @@ namespace kakuro {
       }
     }
 
-    public static List<List<T>> partitionN<T>(int n, List<T> coll) {
+    public static List<List<T>> partitionN<T>(int n, IList<T> coll) {
       return partitionAll(n, n, coll);
     }
 
-    public static List<ValueCell> solveStep(List<ValueCell> cells, int total) {
+    public static List<ValueCell> solveStep(IList<ValueCell> cells, int total) {
       int finalIndex = cells.Count - 1;
       var perms = permuteAll(cells, total)
               .Where(v => isPossible(cells.Last(), v[finalIndex]))
@@ -158,11 +158,11 @@ namespace kakuro {
     }
 
     // returns (non-vals, vals)*
-    public static List<List<ICell>> gatherValues(List<ICell> line) {
+    public static List<List<ICell>> gatherValues(IList<ICell> line) {
       return partitionBy(v => (v is ValueCell), line);
     }
 
-    public static List<SimplePair<List<ICell>>> pairTargetsWithValues(List<ICell> line) {
+    public static List<SimplePair<List<ICell>>> pairTargetsWithValues(IList<ICell> line) {
       return partitionN(2, gatherValues(line))
               .Select(part => new SimplePair<List<ICell>>(part[0], (1 == part.Count) ? new List<ICell>() : part[1]))
               .ToList();
@@ -180,27 +180,27 @@ namespace kakuro {
       }
     }
 
-    public static List<ICell> solveLine(List<ICell> line, Func<ICell, int> f) {
+    public static List<ICell> solveLine(IList<ICell> line, Func<ICell, int> f) {
       return pairTargetsWithValues(line)
               .SelectMany(pair => solvePair(f, pair))
               .ToList();
     }
 
-    public static List<ICell> solveRow(List<ICell> row) {
+    public static List<ICell> solveRow(IList<ICell> row) {
       return solveLine(row, x => ((IAcross)x).getAcross());
     }
 
-    public static List<ICell> solveColumn(List<ICell> column) {
+    public static List<ICell> solveColumn(IList<ICell> column) {
       return solveLine(column, x => ((IDown)x).getDown());
     }
 
-    public static List<List<ICell>> solveGrid(List<List<ICell>> grid) {
+    public static List<List<ICell>> solveGrid(IList<List<ICell>> grid) {
       var rowsDone = grid.Select(r => solveRow(r)).ToList();
       var colsDone = transpose(rowsDone).Select(c => solveColumn(c)).ToList();
       return transpose(colsDone);
     }
 
-    public static bool gridEquals(List<List<ICell>> g1, List<List<ICell>> g2) {
+    public static bool gridEquals(IList<List<ICell>> g1, IList<List<ICell>> g2) {
       if (g1.Count == g2.Count) {
         return Enumerable.Range(0, g1.Count).All(i => {
           var xi = g1[i];
@@ -213,7 +213,7 @@ namespace kakuro {
       }
     }
 
-    public static List<List<ICell>> solver(List<List<ICell>> grid) {
+    public static List<List<ICell>> solver(IList<List<ICell>> grid) {
       Console.WriteLine(drawGrid(grid));
       var g = solveGrid(grid);
       if (gridEquals(g, grid)) {
