@@ -10,31 +10,31 @@ namespace Kakuro {
   class TestKakuro2 {
 
     [Test]
-    public void testDrawEmpty() {
+    public void TestDrawEmpty() {
       var result = e().Draw();
       Assert.AreEqual("   -----  ", result);
     }
 
     [Test]
-    public void testDrawAcross() {
+    public void TestDrawAcross() {
       var result = a(5).Draw();
       Assert.AreEqual("   --\\ 5  ", result);
     }
 
     [Test]
-    public void testDrawDown() {
+    public void TestDrawDown() {
       var result = d(4).Draw();
       Assert.AreEqual("    4\\--  ", result);
     }
 
     [Test]
-    public void testDrawDownAcross() {
+    public void TestDrawDownAcross() {
       var result = da(3, 4).Draw();
       Assert.AreEqual("    3\\ 4  ", result);
     }
 
     [Test]
-    public void testDrawValues() {
+    public void TestDrawValues() {
       var result = v().Draw();
       Assert.AreEqual(" 123456789", result);
       var result12 = v(1, 2).Draw();
@@ -42,14 +42,14 @@ namespace Kakuro {
     }
 
     [Test]
-    public void testDrawRow() {
+    public void TestDrawRow() {
       var line = AsList<ICell>(da(3, 4), v(), v(1, 2), d(4), e(), a(5), v(4), v(1));
       String result = DrawRow(line);
       Assert.AreEqual("    3\\ 4   123456789 12.......    4\\--     -----     --\\ 5       4         1    \n", result);
     }
 
     [Test]
-    public void testProduct() {
+    public void TestProduct() {
       var data = AsList(AsSet(1, 2), AsSet(10), AsSet(100, 200, 300));
       var expected = AsList(
         AsList(1, 10, 100),
@@ -62,7 +62,7 @@ namespace Kakuro {
     }
 
     [Test]
-    public void testPermute() {
+    public void TestPermute() {
       var vs = AsList(v(), v(), v());
       var results = PermuteAll(vs, 6);
       Assert.AreEqual(10, results.Count);
@@ -71,7 +71,7 @@ namespace Kakuro {
     }
 
     [Test]
-    public void testTranspose() {
+    public void TestTranspose() {
       var ints = Enumerable.Range(0, 3)
         .Select(i => Enumerable.Range(0, 4).ToList())
         .ToList();
@@ -81,32 +81,32 @@ namespace Kakuro {
     }
 
     [Test]
-    public void testValueEquality() {
+    public void TestValueEquality() {
       Assert.AreEqual(v(), v());
       Assert.AreEqual(v(1, 2), v(1, 2));
     }
 
     [Test]
-    public void testIsPoss() {
+    public void TestIsPoss() {
       var vc = v(1, 2, 3);
       Assert.AreEqual(true, IsPossible(vc, 2));
       Assert.AreEqual(false, IsPossible(vc, 4));
     }
 
     [Test]
-    public void testTakeWhile() {
+    public void TestTakeWhile() {
       var result = TakeWhile(n => n < 4, Enumerable.Range(0, 10).ToList()).ToList();
       Assert.AreEqual(4, result.Count);
     }
 
     [Test]
-    public void testTakeWhile2() {
+    public void TestTakeWhile2() {
       var result = TakeWhile(n => (n < 4) || (n > 6), Enumerable.Range(0, 10).ToList()).ToList();
       Assert.AreEqual(4, result.Count);
     }
 
     [Test]
-    public void testConcat() {
+    public void TestConcat() {
       var a = AsList(1, 2, 3);
       var b = AsList(4, 5, 6, 1, 2, 3);
       var result = ConcatLists(a, b);
@@ -114,49 +114,49 @@ namespace Kakuro {
     }
 
     [Test]
-    public void testDrop() {
+    public void TestDrop() {
       var a = AsList(1, 2, 3, 4, 5, 6);
       var result = Drop(4, a);
       Assert.AreEqual(2, result.Count);
     }
 
     [Test]
-    public void testTake() {
+    public void TestTake() {
       var a = AsList(1, 2, 3, 4, 5, 6);
       var result = Take(4, a);
       Assert.AreEqual(4, result.Count);
     }
 
     [Test]
-    public void testPartBy() {
+    public void TestPartBy() {
       var data = AsList(1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9);
       var result = PartitionBy(n => 0 == (n % 2), data);
       Assert.AreEqual(9, result.Count);
     }
 
     [Test]
-    public void testPartAll() {
+    public void TestPartAll() {
       var data = AsList(1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9);
       var result = PartitionAll(5, 3, data);
       Assert.AreEqual(5, result.Count);
     }
 
     [Test]
-    public void testPartN() {
+    public void TestPartN() {
       var data = AsList(1, 2, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 9);
       var result = PartitionN(5, data);
       Assert.AreEqual(3, result.Count);
     }
 
     [Test]
-    public void testSolveStep() {
+    public void TestSolveStep() {
       List<ValueCell> result = SolveStep(AsList(v(1, 2), v()), 5);
       Assert.AreEqual(v(1, 2), result[0]);
       Assert.AreEqual(v(3, 4), result[1]);
     }
 
     [Test]
-    public void testGatherValues() {
+    public void TestGatherValues() {
       var line = AsList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
       var result = GatherValues(line);
       Assert.AreEqual(4, result.Count);
@@ -167,7 +167,7 @@ namespace Kakuro {
     }
 
     [Test]
-    public void testPairTargets() {
+    public void TestPairTargets() {
       var line = AsList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
       var result = PairTargetsWithValues(line);
       Assert.AreEqual(2, result.Count);
@@ -178,7 +178,7 @@ namespace Kakuro {
     }
 
     [Test]
-    public void testSolvePair() {
+    public void TestSolvePair() {
       var line = AsList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
       var pairs = PairTargetsWithValues(line);
       var pair = pairs[0];
@@ -189,7 +189,7 @@ namespace Kakuro {
     }
 
     [Test]
-    public void testSolveLine() {
+    public void TestSolveLine() {
       var line = AsList<ICell>(da(3, 4), v(), v(), d(4), e(), a(5), v(), v());
       var result = SolveLine(line, x => ((IAcross)x).GetAcross());
       Assert.AreEqual(8, result.Count);
@@ -200,21 +200,21 @@ namespace Kakuro {
     }
 
     [Test]
-    public void testSolveRow() {
+    public void TestSolveRow() {
       var result = SolveRow(AsList<ICell>(a(3), v(1, 2, 3), v(1)));
       Assert.AreEqual(v(2), result[1]);
       Assert.AreEqual(v(1), result[2]);
     }
 
     [Test]
-    public void testSolveCol() {
+    public void TestSolveCol() {
       var result = SolveColumn(AsList<ICell>(da(3, 12), v(1, 2, 3), v(1)));
       Assert.AreEqual(v(2), result[1]);
       Assert.AreEqual(v(1), result[2]);
     }
 
     [Test]
-    public void testGridEquals() {
+    public void TestGridEquals() {
       var grid1 = AsList(
               AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
               AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
@@ -233,7 +233,7 @@ namespace Kakuro {
     }
 
     [Test]
-    public void testGridEquals2() {
+    public void TestGridEquals2() {
       var grid1 = AsList(
               AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
               AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
@@ -251,7 +251,7 @@ namespace Kakuro {
     }
 
     [Test]
-    public void testGridEquals3() {
+    public void TestGridEquals3() {
       var grid1 = AsList(
               AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
               AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
@@ -270,7 +270,7 @@ namespace Kakuro {
     }
 
     [Test]
-    public void testSolver() {
+    public void TestSolver() {
       var grid1 = AsList(
               AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
               AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
