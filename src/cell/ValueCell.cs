@@ -16,7 +16,7 @@ namespace Kakuro.Cell {
       values = new SortedSet<int>(coll);
     }
 
-    public virtual bool IsPossible(int value) {
+    public virtual bool isPossible(int value) {
       return values.Contains(value);
     }
 
@@ -26,7 +26,7 @@ namespace Kakuro.Cell {
         return values.Select(v => "     " + v + "    ").First();
       }
       else {
-        return Enumerable.Range(1, 9).Aggregate(" ", (acc, v) => acc + (IsPossible(v) ? v.ToString() : "."));
+        return Enumerable.Range(1, 9).Aggregate(" ", (acc, v) => acc + (isPossible(v) ? v.ToString() : "."));
       }
     }
 
