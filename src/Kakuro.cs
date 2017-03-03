@@ -33,7 +33,7 @@ namespace Kakuro {
 
     public static bool AllDifferent<T>(ICollection<T> nums) => nums.Count == new HashSet<T>(nums).Count;
 
-    public static List<T> ConcatLists<T>(IList<T> a, IList<T> b) => a.Concat(b).ToList();
+    public static List<T> ConcatLists<T>(IEnumerable<T> a, IEnumerable<T> b) => a.Concat(b).ToList();
 
     public static ISet<T> AsSet<T>(params T[] values) => new SortedSet<T>(values);
 
@@ -88,9 +88,9 @@ namespace Kakuro {
 
     public static List<T> Take<T>(int n, IList<T> coll) => coll.Take(n).ToList();
 
-    public static List<List<T>> PartitionBy<T>(Predicate<T> f, IList<T> coll) {
+    public static List<IList<T>> PartitionBy<T>(Predicate<T> f, IList<T> coll) {
       if (0 == coll.Count) {
-        return Enumerable.Empty<List<T>>().ToList();
+        return Enumerable.Empty<IList<T>>().ToList();
       }
       else {
         T head = coll[0];
@@ -123,15 +123,15 @@ namespace Kakuro {
     }
 
     // returns (non-vals, vals)*
-    public static List<List<ICell>> GatherValues(IList<ICell> line) => PartitionBy(v => v is ValueCell, line);
+    public static IList<IList<ICell>> GatherValues(IList<ICell> line) => PartitionBy(v => v is ValueCell, line);
 
-    public static List<SimplePair<List<ICell>>> PairTargetsWithValues(IList<ICell> line) {
+    public static IList<SimplePair<IList<ICell>>> PairTargetsWithValues(IList<ICell> line) {
       return PartitionN(2, GatherValues(line))
-              .Select(part => new SimplePair<List<ICell>>(part[0], (1 == part.Count) ? new List<ICell>() : part[1]))
+              .Select(part => new SimplePair<IList<ICell>>(part[0], (1 == part.Count) ? new List<ICell>() : part[1]))
               .ToList();
     }
 
-    public static List<ICell> SolvePair(Func<ICell, int> f, SimplePair<List<ICell>> pair) {
+    public static IList<ICell> SolvePair(Func<ICell, int> f, SimplePair<IList<ICell>> pair) {
       var notValueCells = pair.left;
       if (0 == pair.right.Count) {
         return notValueCells;
