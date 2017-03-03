@@ -40,7 +40,7 @@ namespace Kakuro {
 
     public static List<T> AsList<T>(params T[] values) => new List<T>(values);
 
-    public static IList<List<T>> Product<T>(List<ISet<T>> colls) {
+    public static IList<List<T>> Product<T>(IList<ISet<T>> colls) {
       switch (colls.Count) {
         case 0:
           return new List<List<T>>();
