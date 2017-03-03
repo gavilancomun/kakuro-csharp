@@ -34,7 +34,7 @@ namespace kakuro {
       return new DownAcrossCell(d, a);
     }
 
-    public static String drawRow(List<ICell> row) {
+    public static String drawRow(IList<ICell> row) {
       return row.Select(c => c.draw())
           .Aggregate("", (acc, v) => acc + v) + "\n";
     }
