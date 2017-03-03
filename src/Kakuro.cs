@@ -11,7 +11,7 @@ namespace kakuro {
     }
 
     public static ValueCell v() {
-      return v(1, 2, 3, 4, 5, 6, 7, 8, 9);
+      return new ValueCell();
     }
 
     public static ValueCell v(params int[] values) {
@@ -40,7 +40,7 @@ namespace kakuro {
     }
 
 
-    public static String drawGrid(List<List<ICell>> grid) {
+    public static String drawGrid(IList<List<ICell>> grid) {
       return grid.Select(k => drawRow(k))
               .Aggregate("", (acc, v) => acc + v);
     }
@@ -50,16 +50,16 @@ namespace kakuro {
     }
 
 
-    public static List<T> conj<T>(List<T> items, T item) {
+    public static List<T> conj<T>(IList<T> items, T item) {
       List<T> result = new List<T>(items);
       result.Add(item);
       return result;
     }
 
-    public static List<T> concatLists<T>(List<T> a, List<T> b) {
+    public static List<T> concatLists<T>(IList<T> a, IList<T> b) {
       return a.Concat(b).ToList();
     }
-    public static SortedSet<T> asSet<T>(params T[] values) {
+    public static ISet<T> asSet<T>(params T[] values) {
       return new SortedSet<T>(values);
     }
 
@@ -67,27 +67,27 @@ namespace kakuro {
       return new List<T>(values);
     }
 
-    public static List<List<T>> product<T>(List<SortedSet<T>> colls) {
+    public static List<List<T>> product<T>(List<ISet<T>> colls) {
       switch (colls.Count) {
         case 0:
           return new List<List<T>>();
         case 1:
           return colls[0].Select(a => asList(a)).ToList();
         default:
-          ICollection<T> head = colls[0];
-          List<SortedSet<T>> tail = colls.Skip(1).ToList();
-          List<List<T>> tailProd = product(tail);
+          var head = colls[0];
+          var tail = colls.Skip(1).ToList();
+          var tailProd = product(tail);
           return head.SelectMany(x => tailProd.Select(ys => concatLists(asList(x), ys)))
                   .ToList();
       }
     }
-    public static List<List<int>> permuteAll(List<ValueCell> vs, int target) {
-      List<SortedSet<int>> values = vs.Select(v => v.values).ToList();
+    public static List<List<int>> permuteAll(IList<ValueCell> vs, int target) {
+      var values = vs.Select(v => v.values).ToList();
       return product(values).Where(x => target == x.Sum())
               .ToList();
     }
 
-    public static List<List<T>> transpose<T>(List<List<T>> m) {
+    public static List<List<T>> transpose<T>(IList<List<T>> m) {
       if (0 == m.Count) {
         return new List<List<T>>();
       }
@@ -102,7 +102,7 @@ namespace kakuro {
       return v.Contains(n);
     }
 
-    public static IEnumerable<T> takeWhile<T>(Predicate<T> f, List<T> coll) {
+    public static IEnumerable<T> takeWhile<T>(Predicate<T> f, IList<T> coll) {
       foreach (var item in coll) {
         if (f.Invoke(item)) {
           yield return item;
@@ -113,22 +113,22 @@ namespace kakuro {
       }
     }
 
-    public static List<T> drop<T>(int n, List<T> coll) {
+    public static List<T> drop<T>(int n, IList<T> coll) {
       return coll.Skip(n).ToList();
     }
 
-    public static List<T> take<T>(int n, List<T> coll) {
+    public static List<T> take<T>(int n, IList<T> coll) {
       return coll.Take(n).ToList();
     }
 
-    public static List<List<T>> partitionBy<T>(Predicate<T> f, List<T> coll) {
+    public static List<List<T>> partitionBy<T>(Predicate<T> f, IList<T> coll) {
       if (0 == coll.Count) {
         return Enumerable.Empty<List<T>>().ToList();
       }
       else {
         T head = coll[0];
         bool fx = f.Invoke(head);
-        List<T> group = takeWhile(y => fx == f.Invoke(y), coll).ToList();
+        var group = takeWhile(y => fx == f.Invoke(y), coll).ToList();
         return concatLists(asList(group), partitionBy(f, drop(group.Count, coll)));
       }
     }

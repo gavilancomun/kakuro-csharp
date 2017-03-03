@@ -8,7 +8,7 @@ namespace kakuro.cell
     public class ValueCell : ICell
     {
 
-        public SortedSet<int> values { get; set; }
+        public ISet<int> values { get; set; }
 
         public ValueCell()
         {
