@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace kakuro.cell
+namespace Kakuro.Cell
 {
 
     public class ValueCell : ICell

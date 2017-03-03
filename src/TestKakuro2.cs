@@ -1,12 +1,12 @@
-﻿using kakuro.cell;
+﻿using Kakuro.Cell;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static kakuro.Kakuro;
+using static Kakuro.Kakuro;
 
-namespace kakuro {
+namespace Kakuro {
   class TestKakuro2 {
 
     [Test]

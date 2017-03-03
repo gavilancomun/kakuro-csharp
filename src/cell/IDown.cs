@@ -1,4 +1,4 @@
-﻿namespace kakuro.cell {
+﻿namespace Kakuro.Cell {
 
 	public interface IDown {
 

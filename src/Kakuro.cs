@@ -1,10 +1,10 @@
-﻿using kakuro.cell;
+﻿using Kakuro.Cell;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace kakuro {
+namespace Kakuro {
   class Kakuro {
     public static ValueCell v(ICollection<int> values) {
       return new ValueCell(values);
