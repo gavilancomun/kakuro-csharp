@@ -2,17 +2,17 @@
 
   public struct DownCell : ICell, IDown {
 
-    private int total;
+    private readonly int total;
 
     public DownCell(int total) {
       this.total = total;
     }
 
-    public string draw() {
+    public string Draw() {
       return string.Format("   {0,2:D}\\--  ", total);
     }
 
-    public int getDown() {
+    public int GetDown() {
       return total;
     }
 

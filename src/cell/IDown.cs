@@ -2,7 +2,7 @@
 
 	public interface IDown {
 
-	int getDown();
+	int GetDown();
 
 	}
 

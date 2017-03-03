@@ -11,33 +11,33 @@ namespace Kakuro {
 
     [Test]
     public void testDrawEmpty() {
-      var result = e().draw();
+      var result = e().Draw();
       Assert.AreEqual("   -----  ", result);
     }
 
     [Test]
     public void testDrawAcross() {
-      var result = a(5).draw();
+      var result = a(5).Draw();
       Assert.AreEqual("   --\\ 5  ", result);
     }
 
     [Test]
     public void testDrawDown() {
-      var result = d(4).draw();
+      var result = d(4).Draw();
       Assert.AreEqual("    4\\--  ", result);
     }
 
     [Test]
     public void testDrawDownAcross() {
-      var result = da(3, 4).draw();
+      var result = da(3, 4).Draw();
       Assert.AreEqual("    3\\ 4  ", result);
     }
 
     [Test]
     public void testDrawValues() {
-      var result = v().draw();
+      var result = v().Draw();
       Assert.AreEqual(" 123456789", result);
-      var result12 = v(1, 2).draw();
+      var result12 = v(1, 2).Draw();
       Assert.AreEqual(" 12.......", result12);
     }
 
@@ -66,7 +66,7 @@ namespace Kakuro {
       var vs = AsList(v(), v(), v());
       var results = PermuteAll(vs, 6);
       Assert.AreEqual(10, results.Count);
-      var diff = results.Where(k => allDifferent(k)).ToList();
+      var diff = results.Where(k => AllDifferent(k)).ToList();
       Assert.AreEqual(6, diff.Count);
     }
 
@@ -109,7 +109,7 @@ namespace Kakuro {
     public void testConcat() {
       var a = AsList(1, 2, 3);
       var b = AsList(4, 5, 6, 1, 2, 3);
-      var result = concatLists(a, b);
+      var result = ConcatLists(a, b);
       Assert.AreEqual(9, result.Count);
     }
 
@@ -182,7 +182,7 @@ namespace Kakuro {
       var line = AsList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
       var pairs = PairTargetsWithValues(line);
       var pair = pairs[0];
-      var result = SolvePair(cell => ((IDown)cell).getDown(), pair);
+      var result = SolvePair(cell => ((IDown)cell).GetDown(), pair);
       Assert.AreEqual(3, result.Count);
       Assert.AreEqual(v(1, 2), result[1]);
       Assert.AreEqual(v(1, 2), result[2]);
@@ -191,7 +191,7 @@ namespace Kakuro {
     [Test]
     public void testSolveLine() {
       var line = AsList<ICell>(da(3, 4), v(), v(), d(4), e(), a(5), v(), v());
-      var result = SolveLine(line, x => ((IAcross)x).getAcross());
+      var result = SolveLine(line, x => ((IAcross)x).GetAcross());
       Assert.AreEqual(8, result.Count);
       Assert.AreEqual(v(1, 3), result[1]);
       Assert.AreEqual(v(1, 3), result[2]);

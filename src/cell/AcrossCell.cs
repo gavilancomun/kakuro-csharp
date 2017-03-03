@@ -2,17 +2,17 @@
 
   public struct AcrossCell : ICell, IAcross {
 
-    private int total;
+    private readonly int total;
 
     public AcrossCell(int total) {
       this.total = total;
     }
 
-    public string draw() {
+    public string Draw() {
       return string.Format("   --\\{0,2:D}  ", total);
     }
 
-    public int getAcross() {
+    public int GetAcross() {
       return total;
     }
 

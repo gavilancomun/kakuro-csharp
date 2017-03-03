@@ -10,15 +10,15 @@
       this.across = across;
     }
 
-    public string draw() {
+    public string Draw() {
       return string.Format("   {0,2:D}\\{1,2:D}  ", down, across);
     }
 
-    public int getAcross() {
+    public int GetAcross() {
       return across;
     }
 
-    public int getDown() {
+    public int GetDown() {
       return down;
     }
 

@@ -35,7 +35,7 @@ namespace Kakuro {
     }
 
     public static string DrawRow(IList<ICell> row) {
-      return row.Select(c => c.draw())
+      return row.Select(c => c.Draw())
           .Aggregate("", (acc, v) => acc + v) + "\n";
     }
 
@@ -45,18 +45,11 @@ namespace Kakuro {
               .Aggregate("", (acc, v) => acc + v);
     }
 
-    public static bool allDifferent<T>(ICollection<T> nums) {
+    public static bool AllDifferent<T>(ICollection<T> nums) {
       return nums.Count == new HashSet<T>(nums).Count;
     }
 
-
-    public static IList<T> conj<T>(IList<T> items, T item) {
-      List<T> result = new List<T>(items);
-      result.Add(item);
-      return result;
-    }
-
-    public static List<T> concatLists<T>(IList<T> a, IList<T> b) {
+    public static List<T> ConcatLists<T>(IList<T> a, IList<T> b) {
       return a.Concat(b).ToList();
     }
     public static ISet<T> AsSet<T>(params T[] values) {
@@ -77,7 +70,7 @@ namespace Kakuro {
           var head = colls[0];
           var tail = colls.Skip(1).ToList();
           var tailProd = Product(tail);
-          return head.SelectMany(x => tailProd.Select(ys => concatLists(AsList(x), ys)))
+          return head.SelectMany(x => tailProd.Select(ys => ConcatLists(AsList(x), ys)))
                   .ToList();
       }
     }
@@ -129,7 +122,7 @@ namespace Kakuro {
         T head = coll[0];
         bool fx = f.Invoke(head);
         var group = TakeWhile(y => fx == f.Invoke(y), coll).ToList();
-        return concatLists(AsList(group), PartitionBy(f, Drop(group.Count, coll)));
+        return ConcatLists(AsList(group), PartitionBy(f, Drop(group.Count, coll)));
       }
     }
 
@@ -138,7 +131,7 @@ namespace Kakuro {
         return Enumerable.Empty<List<T>>().ToList();
       }
       else {
-        return concatLists(AsList(Take(n, coll)), PartitionAll(n, step, Drop(step, coll)));
+        return ConcatLists(AsList(Take(n, coll)), PartitionAll(n, step, Drop(step, coll)));
       }
     }
 
@@ -150,7 +143,7 @@ namespace Kakuro {
       int finalIndex = cells.Count - 1;
       var perms = PermuteAll(cells, total)
               .Where(v => IsPossible(cells.Last(), v[finalIndex]))
-              .Where(v => allDifferent(v))
+              .Where(v => AllDifferent(v))
               .ToList();
       return Transpose(perms)
               .Select(item => v(item))
@@ -187,11 +180,11 @@ namespace Kakuro {
     }
 
     public static List<ICell> SolveRow(IList<ICell> row) {
-      return SolveLine(row, x => ((IAcross)x).getAcross());
+      return SolveLine(row, x => ((IAcross)x).GetAcross());
     }
 
     public static List<ICell> SolveColumn(IList<ICell> column) {
-      return SolveLine(column, x => ((IDown)x).getDown());
+      return SolveLine(column, x => ((IDown)x).GetDown());
     }
 
     public static IList<List<ICell>> SolveGrid(IList<List<ICell>> grid) {

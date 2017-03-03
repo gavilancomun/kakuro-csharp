@@ -2,7 +2,7 @@
 
   public struct EmptyCell : ICell {
 
-    public string draw() {
+    public string Draw() {
       return "   -----  ";
     }
 
