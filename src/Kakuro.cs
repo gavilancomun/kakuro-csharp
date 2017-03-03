@@ -24,8 +24,7 @@ namespace Kakuro {
       return row.Select(c => c.Draw())
           .Aggregate("", (acc, v) => acc + v) + "\n";
     }
-
-
+    
     public static string DrawGrid(IList<List<ICell>> grid) {
       return grid.Select(k => DrawRow(k))
               .Aggregate("", (acc, v) => acc + v);
