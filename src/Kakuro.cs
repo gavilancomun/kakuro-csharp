@@ -198,7 +198,7 @@ namespace Kakuro {
         return Enumerable.Range(0, g1.Count).All(i => {
           var xi = g1[i];
           var yi = g2[i];
-          return Enumerable.Range(0, xi.Count).All(j => (xi.Count == yi.Count) && xi[j].Equals(yi[j]));
+          return (xi.Count == yi.Count) && Enumerable.Range(0, xi.Count).All(j => xi[j].Equals(yi[j]));
         });
       }
       else {

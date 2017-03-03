@@ -2,8 +2,8 @@
 
   public struct DownAcrossCell : ICell, IAcross, IDown {
 
-    private int down;
-    private int across;
+    private readonly int down;
+    private readonly int across;
 
     public DownAcrossCell(int down, int across) {
       this.down = down;
