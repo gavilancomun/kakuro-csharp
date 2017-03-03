@@ -19,6 +19,7 @@
     <Compile Include="src\cell\DownCell.cs" />
     <Compile Include="src\cell\EmptyCell.cs" />
     <Compile Include="src\cell\ValueCell.cs" />
+    <Compile Include="src\TestCS.cs" />
     <Compile Include="src\Pair.cs" />
     <Compile Include="src\Kakuro.cs" />
     <Compile Include="src\SimplePair.cs" />

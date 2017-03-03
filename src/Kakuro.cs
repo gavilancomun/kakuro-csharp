@@ -6,17 +6,16 @@ using System.Text;
 
 namespace kakuro {
   class Kakuro {
-    public static ValueCell v(List<int> values) {
+    public static ValueCell v(ICollection<int> values) {
       return new ValueCell(values);
     }
 
     public static ValueCell v() {
-      System.Diagnostics.Debug.WriteLine("v");
       return v(1, 2, 3, 4, 5, 6, 7, 8, 9);
     }
 
     public static ValueCell v(params int[] values) {
-      return v(values.ToList());
+      return new ValueCell(values);
     }
 
     public static EmptyCell e() {
