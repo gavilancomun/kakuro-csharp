@@ -26,7 +26,7 @@ namespace Kakuro {
     }
     
     public static string DrawGrid(IList<List<ICell>> grid) {
-      return grid.Select(k => DrawRow(k))
+      return grid.Select(DrawRow)
               .Aggregate("", (acc, v) => acc + v);
     }
 
@@ -116,10 +116,10 @@ namespace Kakuro {
       int finalIndex = cells.Count - 1;
       var perms = PermuteAll(cells, total)
               .Where(v => IsPossible(cells.Last(), v[finalIndex]))
-              .Where(v => AllDifferent(v))
+              .Where(AllDifferent)
               .ToList();
       return Transpose(perms)
-              .Select(item => v(item))
+              .Select(v)
               .ToList();
     }
 
