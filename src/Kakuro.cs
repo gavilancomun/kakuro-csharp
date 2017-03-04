@@ -68,7 +68,7 @@ namespace Kakuro {
       else {
         return Enumerable.Range(0, m[0].Count)
                 .Select(i => m.Select(col => col[i]).ToList())
-                .Select(ll => (IList<T>) ll)
+                .Cast<IList<T>>()
                 .ToList();
       }
     }
