@@ -72,8 +72,9 @@ namespace Kakuro {
 
     [Test]
     public void TestTranspose() {
-      var ints = Enumerable.Range(0, 3)
+      IList<IList<int>> ints = Enumerable.Range(0, 3)
         .Select(i => Enumerable.Range(0, 4).ToList())
+        .Select(ll => (IList<int>) ll)
         .ToList();
       var tr = Transpose(ints);
       Assert.AreEqual(ints.Count, tr[0].Count);

@@ -25,7 +25,7 @@ namespace Kakuro {
           .Aggregate("", (acc, v) => acc + v) + "\n";
     }
     
-    public static string DrawGrid(IList<List<ICell>> grid) {
+    public static string DrawGrid(IList<IList<ICell>> grid) {
       return grid.Select(DrawRow)
               .Aggregate("", (acc, v) => acc + v);
     }
@@ -34,16 +34,16 @@ namespace Kakuro {
       return nums.Count == new HashSet<T>(nums).Count;
     }
 
-    public static List<T> ConcatLists<T>(IEnumerable<T> a, IEnumerable<T> b) => a.Concat(b).ToList();
+    public static IList<T> ConcatLists<T>(IEnumerable<T> a, IEnumerable<T> b) => a.Concat(b).ToList();
 
     public static ISet<T> AsSet<T>(params T[] values) => new SortedSet<T>(values);
 
-    public static List<T> AsList<T>(params T[] values) => new List<T>(values);
+    public static IList<T> AsList<T>(params T[] values) => new List<T>(values);
 
-    public static IList<List<T>> Product<T>(IList<ISet<T>> colls) {
+    public static IList<IList<T>> Product<T>(IList<ISet<T>> colls) {
       switch (colls.Count) {
         case 0:
-          return new List<List<T>>();
+          return new List<IList<T>>();
         case 1:
           return colls[0].Select(a => AsList(a)).ToList();
         default:
@@ -54,20 +54,21 @@ namespace Kakuro {
                   .ToList();
       }
     }
-    public static IList<List<int>> PermuteAll(IList<ValueCell> vs, int target) {
+    public static IList<IList<int>> PermuteAll(IList<ValueCell> vs, int target) {
       var values = vs.Select(v => v.values).ToList();
       return Product(values)
               .Where(x => target == x.Sum())
               .ToList();
     }
 
-    public static IList<List<T>> Transpose<T>(IList<List<T>> m) {
+    public static IList<IList<T>> Transpose<T>(IList<IList<T>> m) {
       if (0 == m.Count) {
-        return new List<List<T>>();
+        return new List<IList<T>>();
       }
       else {
         return Enumerable.Range(0, m[0].Count)
                 .Select(i => m.Select(col => col[i]).ToList())
+                .Select(ll => (IList<T>) ll)
                 .ToList();
       }
     }
@@ -144,23 +145,23 @@ namespace Kakuro {
       }
     }
 
-    public static List<ICell> SolveLine(IList<ICell> line, Func<ICell, int> f) {
+    public static IList<ICell> SolveLine(IList<ICell> line, Func<ICell, int> f) {
       return PairTargetsWithValues(line)
               .SelectMany(pair => SolvePair(f, pair))
               .ToList();
     }
 
-    public static List<ICell> SolveRow(IList<ICell> row) => SolveLine(row, x => ((IAcross)x).GetAcross());
+    public static IList<ICell> SolveRow(IList<ICell> row) => SolveLine(row, x => ((IAcross)x).GetAcross());
 
-    public static List<ICell> SolveColumn(IList<ICell> column) => SolveLine(column, x => ((IDown)x).GetDown());
+    public static IList<ICell> SolveColumn(IList<ICell> column) => SolveLine(column, x => ((IDown)x).GetDown());
 
-    public static IList<List<ICell>> SolveGrid(IList<List<ICell>> grid) {
+    public static IList<IList<ICell>> SolveGrid(IList<IList<ICell>> grid) {
       var rowsDone = grid.Select(SolveRow).ToList();
       var colsDone = Transpose(rowsDone).Select(SolveColumn).ToList();
       return Transpose(colsDone);
     }
 
-    public static bool GridEquals(IList<List<ICell>> g1, IList<List<ICell>> g2) {
+    public static bool GridEquals(IList<IList<ICell>> g1, IList<IList<ICell>> g2) {
       if (g1.Count == g2.Count) {
         return Enumerable.Range(0, g1.Count).All(i => {
           var xi = g1[i];
@@ -173,7 +174,7 @@ namespace Kakuro {
       }
     }
 
-    public static IList<List<ICell>> Solver(IList<List<ICell>> grid) {
+    public static IList<IList<ICell>> Solver(IList<IList<ICell>> grid) {
       Console.WriteLine(DrawGrid(grid));
       var g = SolveGrid(grid);
       if (GridEquals(g, grid)) {
