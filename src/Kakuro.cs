@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 namespace Kakuro {
-  class Kakuro {
+  public class Kakuro {
     public static ValueCell v() => new ValueCell();
 
     public static ValueCell v(ICollection<int> values) => new ValueCell(values);

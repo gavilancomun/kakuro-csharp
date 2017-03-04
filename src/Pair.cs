@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace Kakuro {
-  class Pair<T, U> {
+  public class Pair<T, U> {
 
     public T left;
     public U right;
