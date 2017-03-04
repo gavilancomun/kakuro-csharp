@@ -112,7 +112,7 @@ namespace Kakuro {
 
     public static IList<IList<T>> PartitionN<T>(int n, IList<T> coll) => PartitionAll(n, n, coll);
 
-    public static List<ValueCell> SolveStep(IList<ValueCell> cells, int total) {
+    public static IList<ValueCell> SolveStep(IList<ValueCell> cells, int total) {
       int finalIndex = cells.Count - 1;
       var perms = PermuteAll(cells, total)
               .Where(v => IsPossible(cells.Last(), v[finalIndex]))
