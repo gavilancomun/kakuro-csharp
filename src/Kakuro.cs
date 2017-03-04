@@ -101,16 +101,16 @@ namespace Kakuro {
       }
     }
 
-    public static List<List<T>> PartitionAll<T>(int n, int step, IList<T> coll) {
+    public static IList<IList<T>> PartitionAll<T>(int n, int step, IList<T> coll) {
       if (0 == coll.Count) {
-        return Enumerable.Empty<List<T>>().ToList();
+        return Enumerable.Empty<IList<T>>().ToList();
       }
       else {
         return ConcatLists(AsList(Take(n, coll).ToList()), PartitionAll(n, step, Drop(step, coll)));
       }
     }
 
-    public static List<List<T>> PartitionN<T>(int n, IList<T> coll) => PartitionAll(n, n, coll);
+    public static IList<IList<T>> PartitionN<T>(int n, IList<T> coll) => PartitionAll(n, n, coll);
 
     public static List<ValueCell> SolveStep(IList<ValueCell> cells, int total) {
       int finalIndex = cells.Count - 1;
