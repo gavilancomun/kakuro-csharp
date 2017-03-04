@@ -69,16 +69,16 @@ namespace Kakuro {
 
     public static bool IsPossible(ValueCell v, int n) => v.Contains(n);
 
-    public static IEnumerable<T> TakeWhile<T>(Predicate<T> f, IList<T> coll) {
-      foreach (var item in coll) {
-        if (f(item)) {
-          yield return item;
-        }
-        else {
-          yield break;
-        }
-      }
-    }
+//    public static IEnumerable<T> TakeWhile<T>(Predicate<T> f, IList<T> coll) {
+//      foreach (var item in coll) {
+//        if (f(item)) {
+//          yield return item;
+//        }
+//        else {
+//          yield break;
+//        }
+//      }
+//    }
 
     public static IList<T> Drop<T>(int n, IList<T> coll) => coll.Skip(n).ToList();
 
@@ -91,7 +91,7 @@ namespace Kakuro {
       else {
         T head = coll[0];
         bool fx = f(head);
-        var group = TakeWhile(y => fx == f(y), coll).ToList();
+        var group = coll.TakeWhile(y => fx == f(y)).ToList();
         return ConcatLists(AsList(group), PartitionBy(f, Drop(group.Count, coll)));
       }
     }

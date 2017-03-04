@@ -96,13 +96,13 @@ namespace Kakuro {
 
     [Test]
     public void TestTakeWhile() {
-      var result = TakeWhile(n => n < 4, Enumerable.Range(0, 10).ToList()).ToList();
+      var result = Enumerable.Range(0, 10).TakeWhile(n => n < 4).ToList();
       Assert.AreEqual(4, result.Count);
     }
 
     [Test]
     public void TestTakeWhile2() {
-      var result = TakeWhile(n => (n < 4) || (n > 6), Enumerable.Range(0, 10).ToList()).ToList();
+      var result = Enumerable.Range(0, 10).TakeWhile(n => (n < 4) || (n > 6)).ToList();
       Assert.AreEqual(4, result.Count);
     }
 
