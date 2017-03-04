@@ -76,7 +76,7 @@ namespace Kakuro {
 
     public static IEnumerable<T> TakeWhile<T>(Predicate<T> f, IList<T> coll) {
       foreach (var item in coll) {
-        if (f.Invoke(item)) {
+        if (f(item)) {
           yield return item;
         }
         else {
@@ -95,8 +95,8 @@ namespace Kakuro {
       }
       else {
         T head = coll[0];
-        bool fx = f.Invoke(head);
-        var group = TakeWhile(y => fx == f.Invoke(y), coll).ToList();
+        bool fx = f(head);
+        var group = TakeWhile(y => fx == f(y), coll).ToList();
         return ConcatLists(AsList(group), PartitionBy(f, Drop(group.Count, coll)));
       }
     }
@@ -139,7 +139,7 @@ namespace Kakuro {
       }
       else {
         var valueCells = pair.right.Select(cell => (ValueCell)cell).ToList();
-        var newValueCells = SolveStep(valueCells, f.Invoke(notValueCells.Last()));
+        var newValueCells = SolveStep(valueCells, f(notValueCells.Last()));
         return notValueCells.Concat(newValueCells).ToList();
       }
     }
@@ -155,8 +155,8 @@ namespace Kakuro {
     public static List<ICell> SolveColumn(IList<ICell> column) => SolveLine(column, x => ((IDown)x).GetDown());
 
     public static IList<List<ICell>> SolveGrid(IList<List<ICell>> grid) {
-      var rowsDone = grid.Select(r => SolveRow(r)).ToList();
-      var colsDone = Transpose(rowsDone).Select(c => SolveColumn(c)).ToList();
+      var rowsDone = grid.Select(SolveRow).ToList();
+      var colsDone = Transpose(rowsDone).Select(SolveColumn).ToList();
       return Transpose(colsDone);
     }
 
