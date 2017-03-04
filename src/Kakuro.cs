@@ -89,7 +89,7 @@ namespace Kakuro {
 
     public static IList<T> Take<T>(int n, IList<T> coll) => coll.Take(n).ToList();
 
-    public static List<IList<T>> PartitionBy<T>(Predicate<T> f, IList<T> coll) {
+    public static IList<IList<T>> PartitionBy<T>(Predicate<T> f, IList<T> coll) {
       if (0 == coll.Count) {
         return Enumerable.Empty<IList<T>>().ToList();
       }
