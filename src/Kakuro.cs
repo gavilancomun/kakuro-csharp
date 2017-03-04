@@ -20,19 +20,13 @@ namespace Kakuro {
 
     public static DownAcrossCell da(int d, int a) => new DownAcrossCell(d, a);
 
-    public static string DrawRow(IList<ICell> row) {
-      return row.Select(c => c.Draw())
-          .Aggregate("", (acc, v) => acc + v) + "\n";
-    }
-    
-    public static string DrawGrid(IList<IList<ICell>> grid) {
-      return grid.Select(DrawRow)
-              .Aggregate("", (acc, v) => acc + v);
-    }
+    public static string Join(String a, String b) => a + b;
 
-    public static bool AllDifferent<T>(ICollection<T> nums) {
-      return nums.Count == new HashSet<T>(nums).Count;
-    }
+    public static string DrawRow(IList<ICell> r) => r.Select(c => c.Draw()).Aggregate("", Join) + "\n";
+
+    public static string DrawGrid(IList<IList<ICell>> g) => g.Select(DrawRow).Aggregate("", Join);
+
+    public static bool AllDifferent<T>(ICollection<T> nums) => nums.Count == new HashSet<T>(nums).Count;
 
     public static IList<T> ConcatLists<T>(IEnumerable<T> a, IEnumerable<T> b) => a.Concat(b).ToList();
 
@@ -51,7 +45,7 @@ namespace Kakuro {
           var tail = colls.Skip(1).ToList();
           var tailProd = Product(tail);
           return head.SelectMany(x => tailProd.Select(ys => ConcatLists(AsList(x), ys)))
-                  .ToList();
+                     .ToList();
       }
     }
     public static IList<IList<int>> PermuteAll(IList<ValueCell> vs, int target) {
@@ -139,7 +133,7 @@ namespace Kakuro {
         return notValueCells;
       }
       else {
-        var valueCells = pair.right.Select(cell => (ValueCell)cell).ToList();
+        var valueCells = pair.right.Cast<ValueCell>().ToList();
         var newValueCells = SolveStep(valueCells, f(notValueCells.Last()));
         return notValueCells.Concat(newValueCells).ToList();
       }
@@ -151,9 +145,9 @@ namespace Kakuro {
               .ToList();
     }
 
-    public static IList<ICell> SolveRow(IList<ICell> row) => SolveLine(row, x => ((IAcross)x).GetAcross());
+    public static IList<ICell> SolveRow(IList<ICell> r) => SolveLine(r, x => ((IAcross)x).GetAcross());
 
-    public static IList<ICell> SolveColumn(IList<ICell> column) => SolveLine(column, x => ((IDown)x).GetDown());
+    public static IList<ICell> SolveColumn(IList<ICell> c) => SolveLine(c, x => ((IDown)x).GetDown());
 
     public static IList<IList<ICell>> SolveGrid(IList<IList<ICell>> grid) {
       var rowsDone = grid.Select(SolveRow).ToList();

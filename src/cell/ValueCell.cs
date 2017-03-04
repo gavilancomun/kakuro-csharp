@@ -23,7 +23,7 @@ namespace Kakuro.Cell {
     public virtual string Draw() {
       System.Diagnostics.Debug.WriteLine("values " + values);
       if (1 == values.Count) {
-        return values.Select(v => "     " + v + "    ").First();
+        return "     " + values.Single() + "    ";
       }
       else {
         return Enumerable.Range(1, 9).Aggregate(" ", (acc, v) => acc + (isPossible(v) ? v.ToString() : "."));
