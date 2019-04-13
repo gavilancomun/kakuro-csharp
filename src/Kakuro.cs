@@ -79,17 +79,6 @@ namespace Kakuro
 
         public static bool IsPossible(ValueCell v, int n) => v.Contains(n);
 
-        //    public static IEnumerable<T> TakeWhile<T>(Predicate<T> f, IList<T> coll) {
-        //      foreach (var item in coll) {
-        //        if (f(item)) {
-        //          yield return item;
-        //        }
-        //        else {
-        //          yield break;
-        //        }
-        //      }
-        //    }
-
         public static IList<T> Drop<T>(int n, IList<T> coll) => coll.Skip(n).ToList();
 
         public static IList<T> Take<T>(int n, IList<T> coll) => coll.Take(n).ToList();

@@ -1,42 +1,49 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 
-namespace Kakuro {
-  class Other {
-    public static bool Even(int n) {
-      return 0 == n % 2;
-    }
-    public bool MemberEven(int n) {
-      return 0 == n % 2;
-    }
+using NUnit.Framework;
 
-  }
-  class TestCS {
+namespace Kakuro
+{
+    class Other
+    {
+        public static bool Even(int n)
+        {
+            return 0 == n % 2;
+        }
+        public bool MemberEven(int n)
+        {
+            return 0 == n % 2;
+        }
 
-    public bool Even(int n) {
-      return 0 == n % 2;
     }
+    class TestCS
+    {
 
-    [Test]
-    public void TestMemberDelegate() {
-      var result = Enumerable.Range(0, 10).Where(Even).ToList();
-      Assert.AreEqual(5, result.Count);
-    }
+        public bool Even(int n)
+        {
+            return 0 == n % 2;
+        }
 
-    [Test]
-    public void TestRemoteStaticDelegate() {
-      var result = Enumerable.Range(0, 10).Where(Other.Even).ToList();
-      Assert.AreEqual(5, result.Count);
-    }
+        [Test]
+        public void TestMemberDelegate()
+        {
+            var result = Enumerable.Range(0, 10).Where(Even).ToList();
+            Assert.AreEqual(5, result.Count);
+        }
 
-    [Test]
-    public void TestRemoteMemberDelegate() {
-      var other = new Other();
-      var result = Enumerable.Range(0, 10).Where(other.MemberEven).ToList();
-      Assert.AreEqual(5, result.Count);
+        [Test]
+        public void TestRemoteStaticDelegate()
+        {
+            var result = Enumerable.Range(0, 10).Where(Other.Even).ToList();
+            Assert.AreEqual(5, result.Count);
+        }
+
+        [Test]
+        public void TestRemoteMemberDelegate()
+        {
+            var other = new Other();
+            var result = Enumerable.Range(0, 10).Where(other.MemberEven).ToList();
+            Assert.AreEqual(5, result.Count);
+        }
     }
-  }
 }
