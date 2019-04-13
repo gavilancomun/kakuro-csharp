@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "system",
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outFile": "target/kakuro.js",
+    "sourceMap": true,
+    "target": "ES2016"
+  },
+  "include": [
+    "src/**/*"
+    ],
+    "exclude": [
+      "node_modules",
+      "**/*.spec.ts",
+      "src/**/greeter*.ts"
+    ]
+}
+

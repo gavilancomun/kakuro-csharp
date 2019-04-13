@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Antlr4.4.5.3\build\Antlr4.props" Condition="Exists('packages\Antlr4.4.5.3\build\Antlr4.props')" />
+  <PropertyGroup>
+    <AssemblyName>kakuro</AssemblyName>
+    <OutputPath>Bin\</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectGuid>{B8BC2830-A686-4D39-BC55-B7C40909F9C3}</ProjectGuid>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="src\AssemblyInfo1.cs" />
+    <Compile Include="src\cell\IAcross.cs" />
+    <Compile Include="src\cell\AcrossCell.cs" />
+    <Compile Include="src\cell\ICell.cs" />
+    <Compile Include="src\cell\IDown.cs" />
+    <Compile Include="src\cell\DownAcrossCell.cs" />
+    <Compile Include="src\cell\DownCell.cs" />
+    <Compile Include="src\cell\EmptyCell.cs" />
+    <Compile Include="src\cell\ValueCell.cs" />
+    <Compile Include="src\TestCS.cs" />
+    <Compile Include="src\Pair.cs" />
+    <Compile Include="src\Kakuro.cs" />
+    <Compile Include="src\SimplePair.cs" />
+    <Compile Include="src\TestKakuro2.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Antlr4.Runtime, Version=4.5.0.0, Culture=neutral, PublicKeyToken=09abb75b9ed49849, processorArchitecture=MSIL">
+      <HintPath>packages\Antlr4.Runtime.4.5.3\lib\net40-client\Antlr4.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>packages\NUnit.3.6.1\lib\net40\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="tsconfig.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\kakuro.ts" />
+  </ItemGroup>
+  <!--
+  <Target Name="Build" Inputs="@(Compile)" Outputs="$(OutputPath)$(AssemblyName).exe">
+    <MakeDir Directories="$(OutputPath)" Condition="!Exists('$(OutputPath)')" />
+    <Csc Sources="@(Compile)" OutputAssembly="$(OutputPath)$(AssemblyName).exe"/>
+  </Target>
+-->
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Antlr4.4.5.3\build\Antlr4.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Antlr4.4.5.3\build\Antlr4.props'))" />
+    <Error Condition="!Exists('packages\Antlr4.4.5.3\build\Antlr4.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Antlr4.4.5.3\build\Antlr4.targets'))" />
+  </Target>
+  <Import Project="packages\Antlr4.4.5.3\build\Antlr4.targets" Condition="Exists('packages\Antlr4.4.5.3\build\Antlr4.targets')" />
+</Project>
