@@ -10,7 +10,7 @@ using static Kakuro.Kakuro;
 
 namespace Kakuro
 {
-    class TestKakuro2
+    internal class TestKakuro2
     {
         [Test]
         public void TestDrawEmpty()
@@ -52,7 +52,7 @@ namespace Kakuro
         [Test]
         public void TestDrawRow()
         {
-            var line = AsList<ICell>(da(3, 4), v(), v(1, 2), d(4), e(), a(5), v(4), v(1));
+            var line = AsList(da(3, 4), v(), v(1, 2), d(4), e(), a(5), v(4), v(1));
             String result = DrawRow(line);
             Assert.AreEqual("    3\\ 4   123456789 12.......    4\\--     -----     --\\ 5       4         1    \n", result);
         }
@@ -84,8 +84,8 @@ namespace Kakuro
         [Test]
         public void TestTranspose()
         {
-            IList<IList<int>> ints = Enumerable.Range(0, 3)
-              .Select(i => Enumerable.Range(0, 4).ToList())
+            var ints = Enumerable.Range(0, 3)
+              .Select(_ => Enumerable.Range(0, 4).ToList())
               .Cast<IList<int>>()
               .ToList();
             var tr = Transpose(ints);
@@ -182,7 +182,7 @@ namespace Kakuro
         [Test]
         public void TestGatherValues()
         {
-            var line = AsList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
+            var line = AsList(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
             var result = GatherValues(line);
             Assert.AreEqual(4, result.Count);
             Assert.AreEqual(da(3, 4), result[0][0]);
@@ -194,7 +194,7 @@ namespace Kakuro
         [Test]
         public void TestPairTargets()
         {
-            var line = AsList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
+            var line = AsList(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
             var result = PairTargetsWithValues(line);
             Assert.AreEqual(2, result.Count);
             Assert.AreEqual(da(3, 4), result[0].left[0]);
@@ -206,7 +206,7 @@ namespace Kakuro
         [Test]
         public void TestSolvePair()
         {
-            var line = AsList<ICell>(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
+            var line = AsList(da(3, 4), v(), v(), d(4), e(), a(4), v(), v());
             var pairs = PairTargetsWithValues(line);
             var pair = pairs[0];
             var result = SolvePair(cell => ((IDown)cell).GetDown(), pair);
@@ -218,7 +218,7 @@ namespace Kakuro
         [Test]
         public void TestSolveLine()
         {
-            var line = AsList<ICell>(da(3, 4), v(), v(), d(4), e(), a(5), v(), v());
+            var line = AsList(da(3, 4), v(), v(), d(4), e(), a(5), v(), v());
             var result = SolveLine(line, x => ((IAcross)x).GetAcross());
             Assert.AreEqual(8, result.Count);
             Assert.AreEqual(v(1, 3), result[1]);
@@ -230,7 +230,7 @@ namespace Kakuro
         [Test]
         public void TestSolveRow()
         {
-            var result = SolveRow(AsList<ICell>(a(3), v(1, 2, 3), v(1)));
+            var result = SolveRow(AsList(a(3), v(1, 2, 3), v(1)));
             Assert.AreEqual(v(2), result[1]);
             Assert.AreEqual(v(1), result[2]);
         }
@@ -238,7 +238,7 @@ namespace Kakuro
         [Test]
         public void TestSolveCol()
         {
-            var result = SolveColumn(AsList<ICell>(da(3, 12), v(1, 2, 3), v(1)));
+            var result = SolveColumn(AsList(da(3, 12), v(1, 2, 3), v(1)));
             Assert.AreEqual(v(2), result[1]);
             Assert.AreEqual(v(1), result[2]);
         }
@@ -247,19 +247,19 @@ namespace Kakuro
         public void TestGridEquals()
         {
             var grid1 = AsList(
-                    AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
-                    AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-                    AsList<ICell>(a(18), v(), v(), v(), v(), v()),
-                    AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-                    AsList<ICell>(a(9), v(), v(), a(6), v(), v()),
-                    AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+                    AsList(e(), d(4), d(22), e(), d(16), d(3)),
+                    AsList(a(3), v(), v(), da(16, 6), v(), v()),
+                    AsList(a(18), v(), v(), v(), v(), v()),
+                    AsList(e(), da(17, 23), v(), v(), v(), d(14)),
+                    AsList(a(9), v(), v(), a(6), v(), v()),
+                    AsList(a(15), v(), v(), a(12), v(), v()));
             var grid2 = AsList(
-                    AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
-                    AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-                    AsList<ICell>(a(18), v(), v(), v(), v(), v()),
-                    AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-                    AsList<ICell>(a(9), v(), v(), a(6), v(), v()),
-                    AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+                    AsList(e(), d(4), d(22), e(), d(16), d(3)),
+                    AsList(a(3), v(), v(), da(16, 6), v(), v()),
+                    AsList(a(18), v(), v(), v(), v(), v()),
+                    AsList(e(), da(17, 23), v(), v(), v(), d(14)),
+                    AsList(a(9), v(), v(), a(6), v(), v()),
+                    AsList(a(15), v(), v(), a(12), v(), v()));
             Assert.AreEqual(true, GridEquals(grid1, grid2));
         }
 
@@ -267,18 +267,18 @@ namespace Kakuro
         public void TestGridEquals2()
         {
             var grid1 = AsList(
-                    AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
-                    AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-                    AsList<ICell>(a(18), v(), v(), v(), v(), v()),
-                    AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-                    AsList<ICell>(a(9), v(), v(), a(6), v(), v()),
-                    AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+                    AsList(e(), d(4), d(22), e(), d(16), d(3)),
+                    AsList(a(3), v(), v(), da(16, 6), v(), v()),
+                    AsList(a(18), v(), v(), v(), v(), v()),
+                    AsList(e(), da(17, 23), v(), v(), v(), d(14)),
+                    AsList(a(9), v(), v(), a(6), v(), v()),
+                    AsList(a(15), v(), v(), a(12), v(), v()));
             var grid2 = AsList(
-                    AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
-                    AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-                    AsList<ICell>(a(18), v(), v(), v(), v(), v()),
-                    AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-                    AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+                    AsList(e(), d(4), d(22), e(), d(16), d(3)),
+                    AsList(a(3), v(), v(), da(16, 6), v(), v()),
+                    AsList(a(18), v(), v(), v(), v(), v()),
+                    AsList(e(), da(17, 23), v(), v(), v(), d(14)),
+                    AsList(a(15), v(), v(), a(12), v(), v()));
             Assert.AreEqual(false, GridEquals(grid1, grid2));
         }
 
@@ -286,19 +286,19 @@ namespace Kakuro
         public void TestGridEquals3()
         {
             var grid1 = AsList(
-                    AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
-                    AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-                    AsList<ICell>(a(18), v(), v(), v(), v(), v()),
-                    AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-                    AsList<ICell>(a(9), v(), v(), a(6), v(), v()),
-                    AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+                    AsList(e(), d(4), d(22), e(), d(16), d(3)),
+                    AsList(a(3), v(), v(), da(16, 6), v(), v()),
+                    AsList(a(18), v(), v(), v(), v(), v()),
+                    AsList(e(), da(17, 23), v(), v(), v(), d(14)),
+                    AsList(a(9), v(), v(), a(6), v(), v()),
+                    AsList(a(15), v(), v(), a(12), v(), v()));
             var grid2 = AsList(
-                    AsList<ICell>(e(), d(4), d(22), e(), d(16)),
-                    AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-                    AsList<ICell>(a(18), v(), v(), v(), v(), v()),
-                    AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-                    AsList<ICell>(a(9), v(), v(), a(6), v(), v()),
-                    AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+                    AsList(e(), d(4), d(22), e(), d(16)),
+                    AsList(a(3), v(), v(), da(16, 6), v(), v()),
+                    AsList(a(18), v(), v(), v(), v(), v()),
+                    AsList(e(), da(17, 23), v(), v(), v(), d(14)),
+                    AsList(a(9), v(), v(), a(6), v(), v()),
+                    AsList(a(15), v(), v(), a(12), v(), v()));
             Assert.AreEqual(false, GridEquals(grid1, grid2));
         }
 
@@ -306,12 +306,12 @@ namespace Kakuro
         public void TestSolver()
         {
             var grid1 = AsList(
-                    AsList<ICell>(e(), d(4), d(22), e(), d(16), d(3)),
-                    AsList<ICell>(a(3), v(), v(), da(16, 6), v(), v()),
-                    AsList<ICell>(a(18), v(), v(), v(), v(), v()),
-                    AsList<ICell>(e(), da(17, 23), v(), v(), v(), d(14)),
-                    AsList<ICell>(a(9), v(), v(), a(6), v(), v()),
-                    AsList<ICell>(a(15), v(), v(), a(12), v(), v()));
+                    AsList(e(), d(4), d(22), e(), d(16), d(3)),
+                    AsList(a(3), v(), v(), da(16, 6), v(), v()),
+                    AsList(a(18), v(), v(), v(), v(), v()),
+                    AsList(e(), da(17, 23), v(), v(), v(), d(14)),
+                    AsList(a(9), v(), v(), a(6), v(), v()),
+                    AsList(a(15), v(), v(), a(12), v(), v()));
             var result = Solver(grid1);
             Assert.AreEqual("   --\\ 3       1         2       16\\ 6       4         2    \n", DrawRow(result[1]));
             Assert.AreEqual("   --\\18       3         5         7         2         1    \n", DrawRow(result[2]));
