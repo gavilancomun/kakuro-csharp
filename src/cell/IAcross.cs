@@ -1,9 +1,11 @@
-﻿namespace Kakuro.Cell {
+﻿namespace Kakuro.Cell
+{
 
-	public interface IAcross {
+    public interface IAcross
+    {
 
-	int GetAcross();
+        int GetAcross();
 
-	}
+    }
 
 }

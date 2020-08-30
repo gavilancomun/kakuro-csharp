@@ -1,11 +1,14 @@
-﻿namespace Kakuro.Cell {
+﻿namespace Kakuro.Cell
+{
 
-  public struct EmptyCell : ICell {
+    public struct EmptyCell : ICell
+    {
 
-    public string Draw() {
-      return "   -----  ";
+        public string Draw()
+        {
+            return "   -----  ";
+        }
+
     }
-
-  }
 
 }

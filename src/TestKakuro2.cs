@@ -53,7 +53,7 @@ namespace Kakuro
         public void TestDrawRow()
         {
             var line = AsList(da(3, 4), v(), v(1, 2), d(4), e(), a(5), v(4), v(1));
-            String result = DrawRow(line);
+            var result = DrawRow(line);
             Assert.AreEqual("    3\\ 4   123456789 12.......    4\\--     -----     --\\ 5       4         1    \n", result);
         }
 

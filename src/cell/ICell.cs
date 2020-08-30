@@ -1,9 +1,11 @@
-﻿namespace Kakuro.Cell {
+﻿namespace Kakuro.Cell
+{
 
-	public interface ICell {
+    public interface ICell
+    {
 
-	string Draw();
+        string Draw();
 
-	}
+    }
 
 }

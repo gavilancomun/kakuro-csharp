@@ -54,6 +54,7 @@ namespace Kakuro
                                .ToList();
             }
         }
+
         public static IList<IList<int>> PermuteAll(IList<ValueCell> vs, int target)
         {
             var values = vs.Select(v => v.values).ToList();
@@ -209,6 +210,5 @@ namespace Kakuro
                  AsList(a(15), v(), v(), a(12), v(), v()));
             var result = Solver(grid1);
         }
-
     }
 }

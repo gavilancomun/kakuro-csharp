@@ -12,4 +12,4 @@ packages/
 Bin/
 obj/
 *.suo
-
+.vs
